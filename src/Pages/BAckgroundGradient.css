@@ -1,0 +1,6 @@
+.background{
+    background-color: rgba(64,6,112,0.5);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(64,6,112,0.25);
+}
