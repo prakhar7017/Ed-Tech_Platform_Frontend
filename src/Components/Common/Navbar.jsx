@@ -5,13 +5,14 @@ import Logo from "../../assets/Logo/Logo-Full-Light.png"
 import { Link, matchPath } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {AiOutlineShoppingCart} from "react-icons/ai"
+import ProfileDropDown from "../Core/Auth/ProfileDropDown"
 
 const Navbar=()=>{ 
 
-    const {token}=useSelector((state)=>state.auth);
-    const {user} =useSelector((state)=>state.profile);
-    const {totalItems}=useSelector((state)=>state.cart);
-
+    const { token }=useSelector((state)=>state.auth);
+    const { user } =useSelector((state)=>state.profile);
+    const { totalItem} =useSelector((state)=>state.cart);
+ 
     const location=useLocation();
 
     const matchRoute=(route)=>{
@@ -30,7 +31,9 @@ const Navbar=()=>{
                     {NavbarLinks.map((element,index)=>{
                         return (
                             <li key={index}>
-                                {element.title==="Catalog" ?(<div></div>):(<Link to={element?.path}><p className={`${matchRoute(element?.path) ? "text-yellow-25" :"text-richblack-25"}`}>{element.title}</p></Link>)}
+                                {element.title==="Catalog" ?(<div>
+                                    
+                                </div>):(<Link to={element?.path}><p className={`${matchRoute(element?.path) ? "text-yellow-25" :"text-richblack-25"}`}>{element.title}</p></Link>)}
                             </li>
                         )
                     })}
@@ -39,20 +42,41 @@ const Navbar=()=>{
 
                 {/* login/signin/dashboard  */}
                 <div className="flex gap-x-4 items-center">
-                    {/* {
+                    {
                         user && user?.accountType != "Instructor" && (
                             <Link to="/dashboard/cart" className="relative">
                                 <AiOutlineShoppingCart/>
                                 {
-                                    totalItems>0 && (
+                                    totalItem>0 && (
                                         <span>
-                                            {totalItems}
+                                            {totalItem}
                                         </span>
                                     )
                                 }
                             </Link>
                         )
-                    } */}
+                    }
+                    {
+                        token===null && (
+                            <Link to="/login">
+                                <button className="border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100 rounded-md">
+                                    Log in
+                                </button>
+                            </Link>
+                        )
+                    }
+                    {
+                        token===null && (
+                            <Link to="/signup">
+                                <button className="border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100 rounded-md">
+                                    Sign Up
+                                </button>
+                            </Link>
+                        )
+                    }
+                    {
+                        token !== null && <ProfileDropDown/> 
+                    }
                 </div>
             </div>
         </div>

@@ -11,7 +11,7 @@ const cartSlice=createSlice({
     initialState:initialState,
     reducers:{
         setTotalItems(state,value){
-            state.token=value.payload
+            state.totalItem=value.payload
         }
     }
 })

@@ -6,7 +6,7 @@ import cartReducer from "../Slices/CartSlice"
 
 const rootReducer = combineReducers({
     auth:authReducer,
-    profle:profileReducer,
+    profile:profileReducer,
     cart:cartReducer
 })
 
