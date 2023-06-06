@@ -6,10 +6,10 @@ import FrameImage from "../.././assets/Images/frame.png"
 
 const Template=({title,description1,description2,image,formType})=>{
     return (
-        <div className="flex w-11/12 lg:max-w-[1160] py-12 mx-auto gap-x-12 gap-y-0 justify-between">
+        <div className="flex w-11/12 lg:max-w-maxContent py-12 mx-auto gap-x-12 gap-y-0 justify-between">
             <div className="lg:w-11/12 lg:w-max-[450] mx-auto">
 
-                <h1 className="text-white font-semibold text-[1.875rem] leading-[2.375]">{title}</h1>
+                <h1 className="text-white font-semibold text-[1.875rem] leading-[2.375rem] tracking-tight">{title}</h1>
 
                 <p className="text-[1.125rem] leading-[1.625] mt-4 lg:w-[450px]">
                     <span className="text-[#afb2bf]">{description1}</span>

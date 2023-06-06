@@ -19,7 +19,7 @@ const LoginForm=()=>{
         <form className="flex flex-col mt-6 w-full gap-y-4">
         <label className="w-full">
             <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">Email Address <sup className="text-pink-200">*</sup></p>
-            <input required type="text" name="email" value={email} onChange={handleOnChange}
+            <input required type="email" name="email" value={email} onChange={handleOnChange}
             placeholder="Enter Email Address"
             style={{
             boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
