@@ -10,7 +10,6 @@ import { apiConnector } from "../../Services/ApiConnector";
 import { Categories } from "../../Services/Apis";
 import {IoIosArrowDropdownCircle} from "react-icons/io"
 const Navbar=()=>{ 
-
     const { token }=useSelector((state)=>state.auth);
     const { user } =useSelector((state)=>state.profile);
     const { totalItem} =useSelector((state)=>state.cart);
@@ -59,7 +58,7 @@ const Navbar=()=>{
 
                                                 <div className="absolute left-[50%] top-0 translate-x-[80%] translate-y-[-45%] h-6 w-6 rotate-45 rounded bg-richblack-5">
                                                 </div>
-                                                {
+                                                {/* {
                                                     subLinks.map((element,index)=>{
                                                         return (
                                                             <div className={`${index==subLinks.length-1 ?"" : "border-b"} text-sm font-mono font-medium`} key={index}>
@@ -67,7 +66,7 @@ const Navbar=()=>{
                                                             </div>
                                                         )
                                                     })
-                                                }
+                                                } */}
                                             </div>                                            
                                         </div>
                                     )

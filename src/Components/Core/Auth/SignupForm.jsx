@@ -3,8 +3,15 @@ import { toast } from "react-hot-toast";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { ACCOUNT_TYPE } from "../../../Util/Contants";
 import Tab from "../../Common/Tab";
+import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import {sendOtp} from "../../../Services/Operations/AuthAPI";
+import {setSignupData} from "../../../Slices/authSlice";
 const SignupForm=()=>{
     const [accountType,setAccountType]=useState(ACCOUNT_TYPE.STUDENT);
+
+    const navigate=useNavigate();
+    const dispatch=useDispatch();
 
     const [formData,setFormData]=useState({
         firstName: "",
@@ -25,6 +32,32 @@ const SignupForm=()=>{
         }))
     }
 
+    const handelOnSubmit=(e)=>{
+        e.preventDefault()
+
+        if(password!=confirmPassword){
+            toast.error("Oppss!! Passwords Does not Match")
+            return;
+        }
+
+        const signupData={
+            ...formData,accountType
+        }
+
+        dispatch(setSignupData(signupData))
+
+        dispatch(sendOtp(formData.email,navigate));
+
+        setFormData({
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+        })
+        setAccountType(ACCOUNT_TYPE.STUDENT)
+    }
+
     const tabData=[{
         id: 1,
         tabName: "Student",
@@ -39,7 +72,7 @@ const SignupForm=()=>{
         <div>
         <Tab tabData={tabData} field={accountType} setfield={setAccountType}/>
 
-        <form className="flex flex-col w-full gap-y-4">
+        <form onSubmit={handelOnSubmit} className="flex flex-col w-full gap-y-4">
             <div className="flex gap-x-4">
                 <label>
                     <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">

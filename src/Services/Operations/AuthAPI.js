@@ -10,9 +10,7 @@ import {apiConnector} from "../ApiConnector";
 
 import { endpoints } from "../Apis";
 
-const {SENDOTP_API,SIGNUP_API,LOGIN_API,      RESETPASSTOKEN_API,
-RESETPASSWORD_API,
-}=endpoints
+const {SENDOTP_API,SIGNUP_API,LOGIN_API,RESETPASSTOKEN_API,RESETPASSWORD_API,}=endpoints
 
 export const sendOtp=(email,navigate)=>{
     return async (dispatch)=>{
@@ -73,7 +71,7 @@ export const login =(email,password,navigate)=>{
                 email,password
             })
 
-            console.log(response);
+            console.log(response.data.data);
             if(!response.data.success){
                 throw new Error(response.data.message)
             }

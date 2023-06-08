@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
+import { useDispatch } from "react-redux"
+import {login} from "../../../Services/Operations/AuthAPI"
 const LoginForm=()=>{
-
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [formData,setFormData]=useState({email:"",password:""})
 
     const[showPassword,setShowPassword]=useState(false);
@@ -15,8 +18,14 @@ const LoginForm=()=>{
         }))
     }
 
+    const handelOnSubmit=(e)=>{
+        e.preventDefault()
+        dispatch(login(email,password,navigate))
+
+    }
+
     return (
-        <form className="flex flex-col mt-6 w-full gap-y-4">
+        <form onSubmit={handelOnSubmit} className="flex flex-col mt-6 w-full gap-y-4">
         <label className="w-full">
             <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">Email Address <sup className="text-pink-200">*</sup></p>
             <input required type="email" name="email" value={email} onChange={handleOnChange}
