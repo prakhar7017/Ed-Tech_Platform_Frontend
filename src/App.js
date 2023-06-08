@@ -4,6 +4,7 @@ import Navbar from "./Components/Common/Navbar";
 import "./App.css";
 import Login from "./Components/Core/Auth/Login";
 import SignUp from "./Components/Core/Auth/SignUp";
+import ForgotPassword from "./Pages/Forgot";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/" element={<Home/>}/>
           <Route path="/login" element={<Login/>}></Route>
           <Route path="/signup" element={<SignUp/>}></Route>
+          <Route path="/forgot-password" element={<ForgotPassword/>}></Route>
       </Routes>
     </div>
   );
