@@ -6,6 +6,7 @@ import Login from "./Components/Core/Auth/Login";
 import SignUp from "./Components/Core/Auth/SignUp";
 import ForgotPassword from "./Pages/Forgot";
 import UpdatePassword from "./Pages/UpdatePassword";
+import VerifyEmail from "./Pages/VerifyEmail";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/signup" element={<SignUp/>}></Route>
           <Route path="/forgot-password" element={<ForgotPassword/>}></Route>
           <Route path="/update-password/:id" element={<UpdatePassword/>}></Route>
+          <Route path="/verify-email" element={<VerifyEmail/>}></Route>
       </Routes>
     </div>
   );
