@@ -28,7 +28,7 @@ const CodeBlocks=({heading,position,subheading,ctabtn1,ctabtn2,codeblocks,backgr
             {/* section 2 */}
             <div className="h-fit flex flex-row text-[15px] w-[100%] justify-between items-baseline py-4 lg:w-[500px]">
                 {/* hw bg gradient  */}
-                <div className="background">
+                <div className="" style={{backgroundColor:"#000814",boxShadow: "0 0 10px rgba(255, 255, 255, 0.5)"}}>
 
                 </div>
                 <div className="text-center flex flex-col w-[10%] text-richblack-400 font-inter font-bold">

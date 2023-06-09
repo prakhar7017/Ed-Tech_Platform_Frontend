@@ -50,11 +50,13 @@ const TimeLineSection=()=>{
                     })}
                 </div>
                 
-                <div className="relative shadow-blue-200">
+                <div className="relative shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]">
                         <img src={TimeLineImage}
                         alt="TimeLineImage"
                         loading="lazy"
-                        className="shadow-white object-fit object-cover"></img>
+                        className="shadow-white object-fit object-cover"
+                        style={{boxShadow:"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgb(255, 255, 255) 20px 20px 0px 0px"}}
+                        ></img>
 
                         <div className="absolute bg-caribbeangreen-700 flex flex-row text-white uppercase py-10 left-[50%] translate-x-[-50%] translate-y-[-60%]">
                             <div className="flex flex-row gap-5 items-center border-r border-caribbeangreen-300 px-7">

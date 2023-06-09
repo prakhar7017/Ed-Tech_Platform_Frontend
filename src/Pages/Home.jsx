@@ -42,8 +42,8 @@ const Home=()=>{
                     </Button>
                 </div>
 
-                <div className="shadow-richblue-50 mx-3 my-12">
-                    <video muted autoPlay loop>
+                <div className="shadow-richblue-50 mx-3 my-12 shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]">
+                    <video muted autoPlay loop style={{boxShadow:"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgb(255, 255, 255) 20px 20px 0px 0px"}}>
                         <source src={BannerVideo} type="video/mp4"/>
                     </video>
                 </div>

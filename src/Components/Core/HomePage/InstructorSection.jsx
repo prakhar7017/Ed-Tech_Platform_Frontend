@@ -8,11 +8,12 @@ const InstructorSection=()=>{
         <div className="mt-24 ">
             <div className="flex flex-row gap-20 items-center">
 
-                <div className="w-[50%]">
+                <div className="w-[50%] shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]">
                     <img src={InstructorImage}
                         alt="InstructorImage"
                         loading="lazy"
-                        className="shadow-white shadow-lg"
+                        className="shadow-white shadow-lg "
+                        style={{boxShadow:"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgb(255, 255, 255) 20px 20px 0px 0px"}}
                     />
                 </div>
 
