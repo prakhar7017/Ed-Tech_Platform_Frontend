@@ -7,6 +7,7 @@ import SignUp from "./Components/Core/Auth/SignUp";
 import ForgotPassword from "./Pages/Forgot";
 import UpdatePassword from "./Pages/UpdatePassword";
 import VerifyEmail from "./Pages/VerifyEmail";
+import About from "./Pages/About";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword/>}></Route>
           <Route path="/update-password/:id" element={<UpdatePassword/>}></Route>
           <Route path="/verify-email" element={<VerifyEmail/>}></Route>
+          <Route path="/about" element={<About/>}></Route>
       </Routes>
     </div>
   );
