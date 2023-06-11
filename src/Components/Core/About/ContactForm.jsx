@@ -4,10 +4,10 @@ import ContactusForm from "../../Common/ContactUsForm";
 
 const ContactForm=()=>{
     return (
-        <div>
-            <h1>Get in Touch</h1>
-            <p>We’d love to here for you, Please fill out this form.</p>
-            <div>
+        <div className="mx-auto">
+            <h1 className="text-center text-4xl font-semibold">Get in Touch</h1>
+            <p className="text-center text-richblack-300 mt-3">We’d love to here for you, Please fill out this form.</p>
+            <div className="mx-auto">
                 <ContactusForm/>
             </div>
         </div>
