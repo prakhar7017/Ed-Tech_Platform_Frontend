@@ -8,6 +8,7 @@ import ForgotPassword from "./Pages/Forgot";
 import UpdatePassword from "./Pages/UpdatePassword";
 import VerifyEmail from "./Pages/VerifyEmail";
 import About from "./Pages/About";
+import ContactUs from "./Pages/ContactUs";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/update-password/:id" element={<UpdatePassword/>}></Route>
           <Route path="/verify-email" element={<VerifyEmail/>}></Route>
           <Route path="/about" element={<About/>}></Route>
+          <Route path="/contact" element={<ContactUs/>}></Route>
       </Routes>
     </div>
   );

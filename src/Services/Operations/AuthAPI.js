@@ -10,6 +10,8 @@ import {apiConnector} from "../ApiConnector";
 
 import { endpoints } from "../Apis";
 
+import {contactusEndpoint}  from "../Apis"
+
 const {SENDOTP_API,SIGNUP_API,LOGIN_API,RESETPASSTOKEN_API,RESETPASSWORD_API,}=endpoints
 
 export const sendOtp=(email,navigate)=>{
@@ -153,5 +155,25 @@ export function getPasswordResetToken(email, setEmailSent) {
       }
       toast.dismiss(toastId)
       dispatch(setLoading(false))
+    }
+  }
+
+  export function Contactus(data){
+    return async(dispatch)=>{
+      const toastId=toast.loading("Please Wait")
+      dispatch(setLoading(true));
+      try {
+        const response=await apiConnector("POST",contactusEndpoint.CONTACT_US_API,data);
+        console.log(response)
+        if(!response.data.success){
+          throw new Error(response.data.message);
+        }
+        toast.success("We will contact you Shortly")
+      } catch (error) {
+        console.log("contactUs Error............", error)
+        toast.error("Opps Failed to reach us")
+      }
+      toast.dismiss(toastId)
+      setLoading(false);
     }
   }
