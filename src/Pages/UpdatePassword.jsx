@@ -3,13 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import {AiOutlineArrowLeft} from "react-icons/ai"
 import {} from "../Services/Operations/AuthAPI"; 
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import {resetPassword} from "../Services/Operations/AuthAPI"
+import { toast } from "react-hot-toast";
+import { Navigate } from "react-router-dom";
 
 
 const UpdatePassword=()=>{
     const dispatch=useDispatch();
+    const navigate=useNavigate();
     const location=useLocation();
 
     const {loading}=useSelector((state)=>state.auth);
@@ -20,7 +23,7 @@ const UpdatePassword=()=>{
 
     const [formData,setFormData]=useState({
         password:"",
-        confirmpassword:""
+        confirmPassword:""
     })
 
     const {password,confirmPassword}=formData;
@@ -32,8 +35,14 @@ const UpdatePassword=()=>{
     const handelOnSubmit=(e)=>{
         e.preventDefault();
         const token=location.pathname.split('/').at(-1);
+        console.log(password,confirmPassword)
 
-        dispatch(resetPassword(password,confirmPassword,token));
+        if(password!=confirmPassword){
+            toast.error("passwords does not match");
+            return
+        }
+
+        dispatch(resetPassword(password,confirmPassword,token,navigate));
     }
     return (
         <div className="lg:w-[31.75rem] lg:h-[28rem] flex justify-center items-center mx-auto p-4 m-4">
@@ -68,7 +77,7 @@ const UpdatePassword=()=>{
                             <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">Confirm new password<sup className="text-pink-200">*</sup>
                             </p>
                             <input required type={showConfirmPassword ? "text" :"password"}
-                            name="confirmpassword"
+                            name="confirmPassword"
                             placeholder="Enter Confirm Password"
                             onChange={handelOnChange}
                             style={{boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)"}}

@@ -9,6 +9,7 @@ import UpdatePassword from "./Pages/UpdatePassword";
 import VerifyEmail from "./Pages/VerifyEmail";
 import About from "./Pages/About";
 import ContactUs from "./Pages/ContactUs";
+import OpenRoute from "./Components/Core/Auth/OpenRoute";
 
 function App() {
   return (
@@ -16,13 +17,13 @@ function App() {
       <Navbar/>
       <Routes>
           <Route path="/" element={<Home/>}/>
-          <Route path="/login" element={<Login/>}></Route>
-          <Route path="/signup" element={<SignUp/>}></Route>
-          <Route path="/forgot-password" element={<ForgotPassword/>}></Route>
-          <Route path="/update-password/:id" element={<UpdatePassword/>}></Route>
-          <Route path="/verify-email" element={<VerifyEmail/>}></Route>
-          <Route path="/about" element={<About/>}></Route>
-          <Route path="/contact" element={<ContactUs/>}></Route>
+          <Route path="/login" element={<OpenRoute><Login/></OpenRoute>}></Route>
+          <Route path="/signup" element={<OpenRoute><SignUp/></OpenRoute>}></Route>
+          <Route path="/forgot-password" element={<OpenRoute><ForgotPassword/></OpenRoute>}></Route>
+          <Route path="/update-password/:id" element={<OpenRoute><UpdatePassword/></OpenRoute>}></Route>
+          <Route path="/verify-email" element={<OpenRoute><VerifyEmail/></OpenRoute>}></Route>
+          <Route path="/about" element={<OpenRoute><About/></OpenRoute>}></Route>
+          <Route path="/contact" element={<OpenRoute><ContactUs/></OpenRoute>}></Route>
       </Routes>
     </div>
   );

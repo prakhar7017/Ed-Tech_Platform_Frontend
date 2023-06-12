@@ -9,7 +9,6 @@ import { useDispatch } from "react-redux";
 
 const ContactusForm=()=>{
     const dispatch=useDispatch();
-    const [loading,setLoading]=useState(false);
     const {register,reset,handleSubmit,formState:{errors,isSubmitSuccessful}}=useForm();
 
     const handelOnSubmit=async(data)=>{

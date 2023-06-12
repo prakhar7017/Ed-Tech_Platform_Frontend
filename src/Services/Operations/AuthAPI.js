@@ -20,7 +20,7 @@ export const sendOtp=(email,navigate)=>{
         dispatch(setLoading(true))
         try {
             const response=await apiConnector("POST",SENDOTP_API,{email,checkUserPresent:true})
-            console.log(response.data.success)
+            console.log(response.data)
 
             if(!response.data.success){
                 throw new Error(response.data.message)
@@ -36,13 +36,14 @@ export const sendOtp=(email,navigate)=>{
     }
 }
 
-export const signup =(accountType,firstName,lastName,email,password,confirmPassword,Otp,navigate)=>{
+export const signup =(accountType,firstName,lastName,email,password,confirmPassword,otp,navigate)=>{
+  console.log(`otp->`,otp);
     return async (dispatch)=>{
         const toastId=toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
             const response=await apiConnector("POST",SIGNUP_API,{
-                accountType,firstName,lastName,email,password,confirmPassword,Otp
+                accountType,firstName,lastName,email,password,confirmPassword,otp
             })
 
             console.log(response.data.success)
@@ -73,16 +74,19 @@ export const login =(email,password,navigate)=>{
                 email,password
             })
 
-            console.log(response.data.data);
+            console.log(response.data);
             if(!response.data.success){
                 throw new Error(response.data.message)
             }
-            toast.success("Yupiii !! Login Successfull")
+  
             dispatch(setToken(response.data.token));
-            const userImage=response.data?.user?.image ?response.data.user.image :`https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`
-            dispatch(setUser({...response.data.user,image:userImage}))
+            const userImage=response.data?.existUser?.image ? response.data.existUser.image :`https://api.dicebear.com/5.x/initials/svg?seed=${response.data.existUser.firstName} ${response.data.existUser.lastName}`
+            dispatch(setUser({...response.data.existUser,image:userImage}))
             localStorage.setItem("token",JSON.stringify(response.data.token))
+
+            toast.success("Yupiii !! Login Successfull")
             navigate("/dashboard/my-profile")
+
         } catch (error) {
             console.log(error)
             toast.error("Oppss !! login Failed")   
@@ -161,7 +165,6 @@ export function getPasswordResetToken(email, setEmailSent) {
   export function Contactus(data){
     return async(dispatch)=>{
       const toastId=toast.loading("Please Wait")
-      dispatch(setLoading(true));
       try {
         const response=await apiConnector("POST",contactusEndpoint.CONTACT_US_API,data);
         console.log(response)
@@ -174,6 +177,5 @@ export function getPasswordResetToken(email, setEmailSent) {
         toast.error("Opps Failed to reach us")
       }
       toast.dismiss(toastId)
-      setLoading(false);
     }
   }
