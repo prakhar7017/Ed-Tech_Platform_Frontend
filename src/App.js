@@ -10,6 +10,10 @@ import VerifyEmail from "./Pages/VerifyEmail";
 import About from "./Pages/About";
 import ContactUs from "./Pages/ContactUs";
 import OpenRoute from "./Components/Core/Auth/OpenRoute";
+import DashBoard from "./Pages/DashBoard";
+import PrivateRoute from "./Components/Common/PrivateRoute";
+import MyProfile from "./Pages/MyProfile";
+import Error from "./Pages/Error"
 
 function App() {
   return (
@@ -24,6 +28,12 @@ function App() {
           <Route path="/verify-email" element={<OpenRoute><VerifyEmail/></OpenRoute>}></Route>
           <Route path="/about" element={<OpenRoute><About/></OpenRoute>}></Route>
           <Route path="/contact" element={<OpenRoute><ContactUs/></OpenRoute>}></Route>
+          <Route element={<PrivateRoute><DashBoard/></PrivateRoute>}>
+              <Route path="/dashboard/my-profile" element={<MyProfile/>}></Route>
+          </Route>
+
+          <Route path="*" element={<OpenRoute><Error/></OpenRoute>}></Route>
+
       </Routes>
     </div>
   );

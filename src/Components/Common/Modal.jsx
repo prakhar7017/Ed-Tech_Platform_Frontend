@@ -5,18 +5,20 @@ const Modal =({modalData})=>{
     return (
         <div>
             <div>
-                <p>{modalData.title}</p>
-                <p>{modalData.description}</p>
+                <p>{modalData.text1}</p>
+                <p>{modalData.text2}</p>
                 <div>
                     <IconButton
                         Onclick={modalData?.btn1Handler}
-                        title={modalData?.btn1Title}
+                        text={modalData?.btn1Text}
                     />
                     <button onClick={modalData?.btn2Handler}>
-                        {modalData?.btn2Title}
+                        {modalData?.btn2Text}
                     </button>
                 </div>
             </div>
         </div>
     )
 }
+
+export default Modal;
