@@ -74,14 +74,15 @@ export const login =(email,password,navigate)=>{
                 email,password
             })
 
-            console.log(response.data);
             if(!response.data.success){
                 throw new Error(response.data.message)
             }
 
-            console.log(response.data.token)
             dispatch(setToken(response.data.token));
+            localStorage.setItem("token",JSON.stringify(response.data.token))
+
             const userImage=response.data?.existUser?.image ? response.data.existUser.image :`https://api.dicebear.com/5.x/initials/svg?seed=${response.data.existUser.firstName} ${response.data.existUser.lastName}`
+            
             dispatch(setUser({...response.data.existUser,image:userImage}))
             localStorage.setItem("user",JSON.stringify(response.data.existUser))
 

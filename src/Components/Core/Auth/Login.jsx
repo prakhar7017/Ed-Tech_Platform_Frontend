@@ -3,8 +3,6 @@ import Template from "../../Common/Template";
 import loginImg from "../../../assets/Images/login.webp"
 
 const Login=()=>{
-    // const Base_URL= process.env.REACT_APP_BASE_URL
-    // console.log(Base_URL)
     return (
         <Template
             title="Welcome Back"
