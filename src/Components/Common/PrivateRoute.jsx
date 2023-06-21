@@ -7,7 +7,7 @@ const PrivateRoute=({children})=>{
     const naviagte=useNavigate();
     const {token}=useSelector((state)=>state.auth);
 
-    if(token){
+    if(token!=null){
         return children;
     }else{
         naviagte("/login")

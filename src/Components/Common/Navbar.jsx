@@ -38,7 +38,7 @@ const Navbar=()=>{
         return matchPath({path:route},location.pathname);
     }
     return (
-        <div className="flex h-14 items-center justify-center border-b-[1px] border-richblack-700 ">
+        <div className="flex h-14 items-center justify-center border-b-[1px] border-richblack-700 bg-richblack-800 ">
             <div className="w-11/12 flex flex-row max-w-maxContent items-center justify-between mx-auto">
                 <Link to="/">
                     <img src={Logo} width={160} height={42} loading="lazy" />

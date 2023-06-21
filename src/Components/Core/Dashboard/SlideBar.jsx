@@ -20,7 +20,7 @@ const SideBar=()=>{
 
     if(authLoading || profileLoadingLoading){
         return (
-            <div className="mt-10">
+            <div className="grid h-[calc(100vh-3.5rem)] min-w-[220px] items-center border-r-[1px] border-r-richblack-700 bg-richblack-800">
                 Loading....
             </div>
         )
@@ -28,7 +28,7 @@ const SideBar=()=>{
 
     return (
         <div>
-            <div className="flex flex-col lg:min-w-[222px] border-r-[1px] border-r-richblack-700 h-[calc(100vh-3.5rem) bg-richblack-800 py-10">
+            <div className="flex h-[calc(100vh-3.5rem)] min-w-[220px] flex-col border-r-[1px] border-r-richblack-700 bg-richblack-800 py-10 z-10">
                 <div className="flex flex-col">
                     {
                         sidebarLinks.map((element)=>{
@@ -49,18 +49,19 @@ const SideBar=()=>{
                     <SideBarLink 
                         link={{name:"Settings",path:"dashboard/settings"}
                         }
-                        iconName={VscSettingsGear}
+                        iconName={"VscSettingsGear"}
                 />
 
                     <button onClick={()=>
-                        setModal({text1:"Are You Sure ?",
-                        text2:"You Will be Logged Out Of Our Account",
-                        btn1Text:"Logout",
-                        btn2Text:"Cancel",
-                        btn1Handler:()=>dispatch(logout(navigate)),
-                        btn2Handler:()=>setModal(null)
+                        setModal({
+                            text1:"Are You Sure ?",
+                            text2:"You Will be Logged Out Of Our Account",
+                            btn1Text:"Logout",
+                            btn2Text:"Cancel",
+                            btn1Handler:()=>dispatch(logout(navigate)),
+                            btn2Handler:()=>setModal(null)
                     })}
-                    className="text-sm font-medium text-richblack-300">
+                    className="px-8 py-2 text-sm font-medium text-richblack-300">
 
                     <div className="flex items-center gap-x-2">
                         <VscSignOut className="text-lg"/>
