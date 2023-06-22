@@ -84,7 +84,7 @@ export const login =(email,password,navigate)=>{
             const userImage=response.data?.existUser?.image ? response.data.existUser.image :`https://api.dicebear.com/5.x/initials/svg?seed=${response.data.existUser.firstName} ${response.data.existUser.lastName}`
             
             dispatch(setUser({...response.data.existUser,image:userImage}))
-            localStorage.setItem("user",JSON.stringify(response.data.existUser))
+            
 
             toast.success("Yupiii !! Login Successfull")
             navigate("/dashboard/my-profile")

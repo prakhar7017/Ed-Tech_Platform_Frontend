@@ -13,7 +13,7 @@ import {IoIosArrowDropdownCircle} from "react-icons/io"
 const Navbar=()=>{ 
     const { token }=useSelector((state)=>state.auth);
     const { user } =useSelector((state)=>state.profile);
-    const { totalItem} =useSelector((state)=>state.cart);
+    const { totalItems } =useSelector((state)=>state.cart);
  
     const location=useLocation();
 
@@ -84,15 +84,15 @@ const Navbar=()=>{
                 </nav>
 
                 {/* login/signin/dashboard  */}
-                <div className="flex gap-x-4 items-center">
+                <div className="flex gap-x-4 items-center text-2xl, text-richblack-100">
                     {
                         user && user?.accountType != "Instructor" && (
                             <Link to="/dashboard/cart" className="relative">
-                                <AiOutlineShoppingCart/>
+                                <AiOutlineShoppingCart size={"25px"} />
                                 {
-                                    totalItem>0 && (
+                                    totalItems>0 && (
                                         <span>
-                                            {totalItem}
+                                            {totalItems}
                                         </span>
                                     )
                                 }

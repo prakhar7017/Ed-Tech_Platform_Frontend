@@ -5,8 +5,10 @@ import IconButton from "../../../Common/IconButton";
 import {updateDisplayPicture} from "../../../../Services/Operations/SettingAPI"
 
 export default function ChangeProfilePicture(){
+
     const dispatch=useDispatch();
     const {user}=useSelector((state)=>state.profile);
+    console.log(user);
     const {token}=useSelector((state)=>state.auth);
     const [loading,setLoading]=useState(false);
     const [imageFile,setImageFile]=useState(null);
@@ -38,6 +40,7 @@ export default function ChangeProfilePicture(){
 
     const hangleOnFileUpload=async ()=>{
         try {
+            
             setLoading(true);
             const formData=new FormData();
             console.log(imageFile);
@@ -60,7 +63,7 @@ export default function ChangeProfilePicture(){
         <>
             <div className="flex justify-between items-center rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12 text-richblack-5">
                 <div className="flex gap-x-4 items-center">
-                    <img src={previewImageSouce ||user?.image} alt={`profile-${user?.firstName}`} className="aspect-square w-[78px] rounded-full object-cover"/>
+                    <img src={previewImageSouce || user?.image} alt={`profile-${user?.firstName}`} className="aspect-square w-[78px] rounded-full object-cover"/>
                     <div className="space-y-2">
                         <p className="">Change Profile Picture</p>
                         <div className="flex gap-x-3">

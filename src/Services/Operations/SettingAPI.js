@@ -16,7 +16,7 @@ export function updateDisplayPicture(token,formData){
     return async (dispatch)=>{
         const toasId=toast.loading("Loading..")
         try {
-            const response=await apiConnector("PUT",UPDATE_DISPLAY_PICTURE_API,null,formData,{
+            const response=await apiConnector("PUT",UPDATE_DISPLAY_PICTURE_API,formData,null,{
                 "Content-Type": "multipart/form-data",
                 Authorization:`Bearer ${token}`,
             })
@@ -24,8 +24,10 @@ export function updateDisplayPicture(token,formData){
             if(!response.data.success){
                 throw Error(response.data.message)
             }
-            toast.success("Success! Profile Picture Changed SuccessFully"); 
-            dispatch(setUser(response.data.data))
+            // const userimage=response.data.updateProfile.image ? response.data.updateProfile.image :`https://api.dicebear.com/5.x/initials/svg?seed=${response.data.updateProfile.firstName} ${response.data.updateProfile.lastName}`
+            dispatch(setUser({...response.data.updateProfile}))
+            localStorage.setItem("user",JSON.stringify(response.data.updateProfile))
+            toast.success("Success! Profile Picture Changed SuccessFully");
         } catch (error) {
             console.log(error);
             toast.error("We're sorry, but it seems like an error has occurred. Hang tight while we resolve it")
@@ -45,8 +47,8 @@ export function updateProfile(token,formData){
             if(!response.data.success){
                 throw new Error(response.data.message)
             }
-            const userImage=response.data.profileDetails.image ? response.data.profileDetails.image :`https://api.dicebear.com/5.x/initials/svg?seed=${response.data.profileDetails.firstName} ${response.data.profileDetails.lastName}`
-            dispatch(setUser({...response.data.profileDetails,image:userImage}))
+            dispatch(setUser({...response.data.updatedProfile}))
+            localStorage.setItem("user",JSON.stringify({...response.data.updatedProfile}))
             toast.success("Yupii....!! Saved Succesfully")
         } catch (error) {
             console.log(error);
