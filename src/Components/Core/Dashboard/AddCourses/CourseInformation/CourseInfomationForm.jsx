@@ -229,10 +229,9 @@ export default function CourseInformationForm(){
                 </label>
             </div>
             {/* custome component for tag  */}
-            <ChipsTag name={"courseTags"} label={"Course Thumbnail"} register={register} errors={errors} setValue={setValue} getValue={getValues} placeHolder={"Drag and Drop file here"}/>
-            
+            <ChipsTag name={"courseTags"} label={"Tags"} register={register} errors={errors} setValue={setValue} getValue={getValues} placeHolder={"Enter Tags and press enter"}/>
             {/* custome component for uploading media  */}
-            <Upload name={"courseImage"} label={"Tags"} register={register} errors={errors} setValue={setValue} getValue={getValues} placeHolder={"Enter Tags and press enter"}/>
+            <Upload name={"courseImage"} label={"Thumbnail"} register={register} errors={errors} setValue={setValue} getValue={getValues} placeHolder={"Drag and Drop Here"}/>
 
             <div className="flex flex-col space-y-2">
                 <label className="text-sm text-richblack-5">
