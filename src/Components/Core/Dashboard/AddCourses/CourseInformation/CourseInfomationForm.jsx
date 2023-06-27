@@ -17,6 +17,7 @@ import Upload from "./Upload";
 
 
 export default function CourseInformationForm(){
+
     const {token}=useSelector((state)=>state.auth)
     const {register,handleSubmit,setValue,getValues,formState:{errors}}=useForm();
 
@@ -29,31 +30,30 @@ export default function CourseInformationForm(){
     const [courseCategories,setCourseCategories]=useState([]);
 
 
-    useEffect(()=>{
-        const getCategories=async()=>{
-            console.log("hello")
-            setLoading(true); 
-            const categories=await fetchCourseCategories();
-
-            if(categories.length>0){
-                setCourseCategories(categories);
-            }
-
-            setLoading(false);
-
-            if(editCourse){
-                setValue("courseTitle",course.courseName);
-                setValue("courseShortDesc",course.courseDescription);
-                setValue("coursePrice",course.price);
-                setValue("courseTags",course.tag);
-                setValue("courseBenefits",course.whatYouWillLearn);
-                setValue("courseCategory",course.category);
-                setValue("courseRequirements",course.instructions);
-                setValue("courseImage",course.thumbnail);
-            }
-
-            getCategories();
+    const getCategories=async()=>{
+        setLoading(true); 
+        const categories=await fetchCourseCategories();
+        if(categories.length>0){
+            setCourseCategories(categories);
         }
+
+        setLoading(false);
+
+        if(editCourse){
+            setValue("courseTitle",course.courseName);
+            setValue("courseShortDesc",course.courseDescription);
+            setValue("coursePrice",course.price);
+            setValue("courseTags",course.tag);
+            setValue("courseBenefits",course.whatYouWillLearn);
+            setValue("courseCategory",course.category);
+            setValue("courseRequirements",course.instructions);
+            setValue("courseImage",course.thumbnail);
+        }
+
+        
+    }
+    useEffect(()=>{
+        getCategories();
     },[])
 
     const isformUpdated=()=>{

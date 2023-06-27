@@ -30,7 +30,7 @@ const Navbar=()=>{
     }
 
     useEffect(()=>{
-        fetchSubLinks();
+        // fetchSubLinks();
     },[])
 
     const matchRoute=(route)=>{
