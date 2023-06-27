@@ -31,7 +31,6 @@ const Navbar=()=>{
 
     useEffect(()=>{
         fetchSubLinks();
-        console.log("Printing token",token)
     },[])
 
     const matchRoute=(route)=>{

@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./Pages/Home";
 import Navbar from "./Components/Common/Navbar";
 import "./App.css";
@@ -17,8 +17,15 @@ import Settings from "./Components/Core/Dashboard/Settings/Settings";
 import Error from "./Pages/Error"
 import EnrolledCourses from "./Components/Core/Dashboard/EnrolledCourses";
 import Cart from "./Components/Core/Dashboard/Cart/Cart"
+import AddCourse from "./Components/Core/Dashboard/AddCourses/AddCourse";
+import {ACCOUNT_TYPE} from "./Util/Contants"
+import { useDispatch, useSelector } from "react-redux";
 
 function App() {
+
+  const dispatch=useDispatch();
+  const navigate=useNavigate();
+  const {user}=useSelector((state)=>state.profile)
   return (
     <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter ">
       <Navbar/>
@@ -31,11 +38,31 @@ function App() {
           <Route path="/verify-email" element={<OpenRoute><VerifyEmail/></OpenRoute>}></Route>
           <Route path="/about" element={<OpenRoute><About/></OpenRoute>}></Route>
           <Route path="/contact" element={<OpenRoute><ContactUs/></OpenRoute>}></Route>
+
           <Route element={<PrivateRoute><DashBoard/></PrivateRoute>}>
               <Route path="/dashboard/my-profile" element={<MyProfile/>}></Route>
-              <Route path="/dashboard/enrolled-courses" element={<EnrolledCourses/>}></Route>
-              <Route path="/dashboard/cart" element={<Cart/>}></Route>
               <Route path="/dashboard/settings" element={<Settings/>}></Route>
+
+              {
+                user?.accountType===ACCOUNT_TYPE.STUDENT && (
+                  <>
+                  <Route path="/dashboard/enrolled-courses" element={<EnrolledCourses/>}></Route>
+                  <Route path="/dashboard/cart" element={<Cart/>}></Route>
+                  </>
+                )
+              }
+
+
+              {
+                user?.accountType===ACCOUNT_TYPE.INSTRUCTOR && (
+                  <>
+                  <Route path="/dashboard/add-course" element={<AddCourse/>}></Route>
+                  
+                  <Route path="/dashboard/cart" element={<Cart/>}></Route>
+                  </>
+                )
+              }
+              
           </Route>
 
           <Route path="*" element={<OpenRoute><Error/></OpenRoute>}></Route>

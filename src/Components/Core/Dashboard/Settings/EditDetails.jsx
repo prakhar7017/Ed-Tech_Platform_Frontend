@@ -125,6 +125,7 @@ export default function EditDetails(){
                                 }}
                                 className=" rounded-[0.5rem] bg-richblack-600 p-[12px] text-richblack-5"
                                 {...register("contactNumber",{required:true,
+                                valueAsNumber:true,
                                 maxLength:{value:10,message:"Invalid Number"},
                                 minLength:{value:8,message:"Invalid Number"}
                                 })}
