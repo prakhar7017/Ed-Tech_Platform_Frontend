@@ -62,12 +62,11 @@ export default function CourseInformationForm(){
             currentValues.courseTitle!==course.courseName || 
             currentValues.courseShortDesc!==course.courseDescription ||
             currentValues.coursePrice!==course.price ||
-            // currentValues.courseTags.toString()!==course.tag.toString() ||
+            currentValues.courseTags.toString()!==course.tag.toString() ||
             currentValues.courseBenefits!==course.whatYouWillLearn ||
             currentValues.courseCategory!==course.category ||
-            currentValues.courseRequirements.toString()!==course.instructions.toString() 
-            // ||
-            // currentValues.courseImage!==course.thumbnail 
+            currentValues.courseRequirements.toString()!==course.instructions.toString() ||
+            currentValues.courseImage!==course.thumbnail 
             ){
             return true;
         }else{
@@ -93,15 +92,20 @@ export default function CourseInformationForm(){
                     formData.append("price",data.coursePrice);
                 }
                 if(currentValues.courseBenefits!==course.whatYouWillLearn){
-                    formData.append("whatYouWillLearn",data.whatYouWillLearn);
+                    formData.append("whatYouWillLearn",data.courseBenefits);
                 }
-                if(currentValues.courseCategory._id!==course.c._id){
-                    formData.append("whatYouWillLearn",data.courseCategory);
+                if(currentValues.courseCategory._id!==course.category._id){
+                    formData.append("category",data.courseCategory);
                 }
                 if(currentValues.courseRequirements.toString()!==course.instructions.toString()){
-                    formData.append("instructions",data.courseRequirements);
+                    formData.append("instructions",JSON.stringify(data.courseRequirements));
                 }
-    
+                if(currentValues.courseImage!==course.thumbnail){
+                    formData.append("thumbnailImage", data.courseImage)
+                }
+                if (currentValues.courseTags.toString() !== course.tag.toString()) {
+                    formData.append("tag", JSON.stringify(data.courseTags))
+                }
                 setLoading(true);
                 const result=await editCourseDetails(formData,token)
                 setLoading(false);
@@ -122,17 +126,16 @@ export default function CourseInformationForm(){
         formData.append("whatYouWillLearn",data.courseBenefits);
         formData.append("category",data.courseCategory);
         formData.append("instructions",JSON.stringify(data.courseRequirements));
-        formData.append("category",data.courseCategory);
+        formData.append("tag", JSON.stringify(data.courseTags))
         formData.append("status",COURSE_STATUS.DRAFT)
-
+        formData.append("thumbnailImage", data.courseImage)
         setLoading(true);
-        const result=await addCourseDetails(formData,token);
+        const result= await addCourseDetails(formData,token);
         if(result){
             setStep(2);
             dispatch(setCourse(result));
         }
         setLoading(false);
-
     }
 
 
@@ -215,7 +218,7 @@ export default function CourseInformationForm(){
                         <option value="" disabled>Choose a Category</option>
                         {
                             !loading && courseCategories.map((element,index)=>(
-                                <option key={index} value={element?.id}>
+                                <option key={index} value={element?._id}>
                                     {element?.name}
                                 </option>
                             ))

@@ -73,7 +73,7 @@ export const login =(email,password,navigate)=>{
             const response=await apiConnector("POST",LOGIN_API,{
                 email,password
             })
-
+            console.log(response.data.token);
             if(!response.data.success){
                 throw new Error(response.data.message)
             }
