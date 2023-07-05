@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import {FaCheck} from "react-icons/fa";
-import CourseBuilder from "./CourseBuilder";
+import CourseBuilder from "./CourseBuilder/CourseBuilder";
 import PublishCourse from "./PublishCourse";
 import CourseInformationForm from "./CourseInformation/CourseInfomationForm";
 
@@ -64,12 +64,13 @@ export default function RenderSteps(){
             {
                 step === 1 && <CourseInformationForm/>
             }
-            {/* {
+            {
                 step === 2 && <CourseBuilder/>
             }
-            {
+
+            {/* {
                 step === 3 && <PublishCourse/>
-            } */}
+            }  */}
         </>
     )
 }

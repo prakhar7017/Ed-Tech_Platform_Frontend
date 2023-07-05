@@ -110,7 +110,7 @@ export default function CourseInformationForm(){
                 const result=await editCourseDetails(formData,token)
                 setLoading(false);
                 if(result){
-                    setStep(2);
+                    dispatch(setStep(2));
                     dispatch(setCourse(result))
                 }
             }else{
@@ -132,7 +132,7 @@ export default function CourseInformationForm(){
         setLoading(true);
         const result= await addCourseDetails(formData,token);
         if(result){
-            setStep(2);
+            dispatch(setStep(2));
             dispatch(setCourse(result));
         }
         setLoading(false);
