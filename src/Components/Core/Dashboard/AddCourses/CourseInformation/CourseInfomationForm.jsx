@@ -12,6 +12,7 @@ import { toast } from "react-hot-toast";
 import {COURSE_STATUS} from "../../../../../Util/Contants"
 import ChipsTag from "./ChipsTag";
 import Upload from "./Upload";
+import {GrFormNext} from "react-icons/gr"
 
 
 
@@ -43,7 +44,7 @@ export default function CourseInformationForm(){
             setValue("courseTitle",course.courseName);
             setValue("courseShortDesc",course.courseDescription);
             setValue("coursePrice",course.price);
-            setValue("courseTags",course.tag);
+            setValue("courseTags",course.tags);
             setValue("courseBenefits",course.whatYouWillLearn);
             setValue("courseCategory",course.category);
             setValue("courseRequirements",course.instructions);
@@ -62,7 +63,7 @@ export default function CourseInformationForm(){
             currentValues.courseTitle!==course.courseName || 
             currentValues.courseShortDesc!==course.courseDescription ||
             currentValues.coursePrice!==course.price ||
-            currentValues.courseTags.toString()!==course.tag.toString() ||
+            currentValues.courseTags.toString()!==course.tags.toString() ||
             currentValues.courseBenefits!==course.whatYouWillLearn ||
             currentValues.courseCategory!==course.category ||
             currentValues.courseRequirements.toString()!==course.instructions.toString() ||
@@ -103,11 +104,11 @@ export default function CourseInformationForm(){
                 if(currentValues.courseImage!==course.thumbnail){
                     formData.append("thumbnailImage", data.courseImage)
                 }
-                if (currentValues.courseTags.toString() !== course.tag.toString()) {
+                if (currentValues.courseTags.toString() !== course.tags.toString()) {
                     formData.append("tag", JSON.stringify(data.courseTags))
                 }
                 setLoading(true);
-                const result=await editCourseDetails(formData,token)
+                const result=await editCourseDetails(formData,token);
                 setLoading(false);
                 if(result){
                     dispatch(setStep(2));
@@ -207,7 +208,6 @@ export default function CourseInformationForm(){
                     <p>Course Category<sup className="text-pink-200">*</sup></p>
                     <select
                         id="courseCategory"
-                        placeholder="Enter Course Category"
                         defaultValue=""
                         style={{boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                         }}
@@ -234,7 +234,7 @@ export default function CourseInformationForm(){
             {/* custome component for tag  */}
             <ChipsTag name={"courseTags"} label={"Tags"} register={register} errors={errors} setValue={setValue} getValue={getValues} placeHolder={"Enter Tags and press enter"}/>
             {/* custome component for uploading media  */}
-            <Upload name={"courseImage"} label={"Thumbnail"} register={register} errors={errors} setValue={setValue} getValue={getValues} placeHolder={"Drag and Drop Here"}/>
+            <Upload name={"courseImage"} label={"Thumbnail"} register={register} errors={errors} setValue={setValue} getValue={getValues} placeHolder={"Drag and Drop Here"} editData={editCourse ? course?.thumbnail:null}/>
 
             <div className="flex flex-col space-y-2">
                 <label className="text-sm text-richblack-5">
@@ -255,16 +255,18 @@ export default function CourseInformationForm(){
                 </label>
             </div>
             <Requirement name={"courseRequirements"} label={"Requirements/Instructions"} register={register} errors={errors} setValue={setValue} getValue={getValues}/>
-            <div>
+            <div className="flex justify-end gap-x-2">
                 {
                     editCourse && (
                         <button
-                        onClick={()=>dispatch(setStep(2))}>
+                        onClick={()=>dispatch(setStep(2))}
+                        disabled={loading}
+                        className={`flex cursor-pointer items-center gap-x-2 rounded-md bg-richblack-300 py-[8px] px-[20px] font-semibold text-richblack-900`}>
                             Continue without saving
                         </button>
                     )
                 }
-                <IconButton text={!editCourse ? "Next" : "Save Changes"}/>
+                <IconButton type={"submit"} disabled={loading} text={!editCourse ? "Next" : "Save Changes"}><GrFormNext/></IconButton>
             </div>
         </form>
     )

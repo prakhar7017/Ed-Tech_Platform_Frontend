@@ -8,20 +8,19 @@ import { useDispatch, useSelector } from "react-redux";
 import {setEditCourse,setStep,setCourse} from "../../../../../Slices/courseSlice"
 import { toast } from "react-hot-toast";
 import { createSection, updateSection } from "../../../../../Services/Operations/CourseAPI";
-// import { MdToken } from "react-icons/md";
 import NestedViewComponent from "./NestedView";
 
 export default function CourseBuilder(){
     const dispatch=useDispatch();
     const {course}=useSelector((state)=>state.course);
+    // console.log(course);
     const {token}=useSelector((state)=>state.auth);
-    console.log(course.courseContent.lenght)
 
-    const {register,handleSubmit,setValue,getValue,formState:{errors}}=useForm();
+    const {register,handleSubmit,setValue,getValues,formState:{errors}}=useForm();
 
     const [editSectionName,setEditSectionName]=useState(null);
 
-    const [loading,setLoading]=useState("false")
+    const [loading,setLoading]=useState(false)
 
     const onSubmit=async (data)=>{
 
@@ -86,14 +85,15 @@ export default function CourseBuilder(){
 
 
     return (
-        <div>
-            <p className="text-white">Course Builder</p>
-            <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="space-y-8 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-6">
+            <p className="text-2xl font-semibold text-richblack-5">Course Builder</p>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <label className="text-sm text-richblack-5">
                     Section Name 
                     <sup className="text-pink-200"> *</sup>
                     <input
                         id="sectionName"
+                        disabled={loading}
                         name="sectionName"
                         placeholder="Add Section Name"
                         {...register("sectionName",{required:true})}
@@ -110,8 +110,9 @@ export default function CourseBuilder(){
                         )
                     }
                 </label>
-                <div className="flex mt-10">
+                <div className="flex items-end gap-x-4">
                     <IconButton type={"submit"}
+                    disabled={loading}
                         text={editSectionName ? "Edit Section Name" :"Create Section"}
                         outline={true}
                         customeClasses="text-white"
@@ -124,7 +125,7 @@ export default function CourseBuilder(){
                             <button
                                 type="button"
                                 onClick={cancelEdit}
-                                className="text-sm text-richblack-50"
+                                className="text-sm text-richblack-300 underline"
                             >
                                 Cancel Edit
                             </button>
@@ -134,18 +135,18 @@ export default function CourseBuilder(){
             </form>
 
             {
-                course.courseContent.lenght>0 && (
+                course.courseContent.length > 0  && (
                     <NestedViewComponent handleChangeEditSection={handleChangeEditSection}/>
                 )
             }
-            <div>
+            <div className="flex justify-end gap-x-3">
                 <button
                 onClick={goBack}
-                className="rounded-md cursor-pointer flex items-center bg-richblack-100"
+                className={`flex cursor-pointer items-center gap-x-2 rounded-md bg-richblack-300 py-[8px] px-[20px] font-semibold text-richblack-900`}
                 >
                     Back
                 </button>
-                <IconButton text={"next"} onclick={goToNext}>
+                <IconButton disabled={loading} text={"Next"} onclick={goToNext}>
                     <GrFormNext/>
                 </IconButton>
             </div>

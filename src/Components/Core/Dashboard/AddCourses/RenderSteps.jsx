@@ -31,7 +31,9 @@ export default function RenderSteps(){
                     <>
                         <div className="flex flex-col items-center" key={element.id}>
                             <div className={`flex flex-row cursor-default aspect-square w-[34px] items-center justify-center rounded-full border-[1px]
-                            ${step===element.id ? "border-yellow-50 bg-yellow-900 text-yellow-50" :"border-richblack-700 bg-richblack-800 text-richblack-300" }`}>
+                            ${step===element.id ? "border-yellow-50 bg-yellow-900 text-yellow-50" :"border-richblack-700 bg-richblack-800 text-richblack-300"}
+                             ${ step>element.id && "bg-yellow-50 text-yellow-50"}`
+                            }>
                                 {
                                     step > element.id ? (<FaCheck className="font-bold text-richblack-900"/>) 
                                     : (element.id)
@@ -54,7 +56,7 @@ export default function RenderSteps(){
                 {Steps.map((element,index)=>(
                     <>
                         <div className="flex min-w-[130px] flex-col items-center gap-y-2"  key={element.id}>
-                            <p className={`text-sm ${step >= element.id ? "text-richblack-5" :            "text-richblack-500"}`}>
+                            <p className={`text-sm ${step >= element.id ? "text-richblack-5" :"text-richblack-500"}`}>
                                 {element.title}
                             </p>
                         </div>

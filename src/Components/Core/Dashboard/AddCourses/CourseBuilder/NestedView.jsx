@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import {RxDropdownMenu} from "react-icons/rx"
 import {MdModeEditOutline} from "react-icons/md"
 import {RiDeleteBin6Line} from "react-icons/ri";
-import {BiSolidDownArrow} from "react-icons/bi";
+import {AiFillCaretDown} from "react-icons/ai";
 import {IoMdAdd} from "react-icons/io";
 import SubSectionModal from "./SubSectionModal";
 import Modal from "../../../../Common/Modal"
+import { deleteSection, deleteSubSection } from "../../../../../Services/Operations/CourseAPI";
+import {setEditCourse,setStep,setCourse} from "../../../../../Slices/courseSlice"
 
 export default function NestedViewComponent({handleChangeEditSection}){
     const dispatch=useDispatch();
@@ -19,24 +21,45 @@ export default function NestedViewComponent({handleChangeEditSection}){
     const [editSubSection,setEditSubSection]=useState(null);
 
     const [modal,setModal]=useState(null);
-    console.log(course);
 
-    const handleDeleteSection=(sectionId)=>{
+    const handleDeleteSection=async (sectionId)=>{
+        const result=await deleteSection({
+            sectionId,
+            courseId:course._id,
+        },token)
+        if(result){
+            dispatch(setCourse(result));
+        }
+        setModal(null);
 
     }
+
+    const handleDeleteSubSection=async (subSectionId,sectionId)=>{
+        const result=await deleteSubSection({
+            subSectionId,
+            sectionId,
+        },token)
+        if(result){
+            const updatedCourseContent=course?.courseContent?.map((section)=>section._id===sectionId ? result :section)
+            const updatedCourse={...course,courseContent:updatedCourseContent};
+            dispatch(setCourse(updatedCourse));
+        }
+        setModal(null);
+    }
+
     return (
         <div>
-            <div className="text-white mt-10 rounded-lg bg-richblack-700"> 
+            <div cclassName="rounded-lg bg-richblack-700 p-6 px-8"> 
                 {course?.courseContent?.map((section)=>(
                      <details key={section._id} open> 
-                        <summery className="flex items-center justify-between gap-x-3 border-b-2">
+                        <summery className="flex cursor-pointer items-center justify-between border-b-2 border-b-richblack-600 py-2">
                             <div className="flex items-center gap-x-3">
-                                <RxDropdownMenu/>
-                                <p>{section.sectionName}</p>
+                                <RxDropdownMenu className="text-2xl text-richblack-50"/>
+                                <p className="font-semibold text-richblack-50">{section.sectionName}</p>
                             </div>
                             <div className="flex items-center gap-x-3">
-                                <button onClick={handleChangeEditSection(section._id,section.sectionName)}>
-                                    <MdModeEditOutline/>
+                                <button onClick={()=>handleChangeEditSection(section._id,section.sectionName)}>
+                                    <MdModeEditOutline className="text-xl text-richblack-300" />
                                 </button>
                                 <button onClick={()=>{
                                     setModal({
@@ -48,23 +71,24 @@ export default function NestedViewComponent({handleChangeEditSection}){
                                         btn2Handler:()=>setModal(null),
                                     })
                                 }}>
-                                    <RiDeleteBin6Line/>
+                                    <RiDeleteBin6Line className="text-xl text-richblack-300"/>
                                 </button>
-                                <span>|</span>
-                                <BiSolidDownArrow/>
+                                <span className="font-medium text-richblack-300">|</span>
+                                <AiFillCaretDown className={`text-xl text-richblack-300`}/>
                             </div>
                         </summery>
-                        <div>
+                        <div className="px-6 pb-4">
                             {
                                 section?.subSection?.map((data)=>(
-                                   <div key={data?._id} onClick={()=>setViewSubSection(data)} className="flex items-center justify-between gap-x-3 border-b-2">
-                                        <div className="flex items-center gap-x-3">
-                                            <RxDropdownMenu/>
-                                            <p>{data?.title}</p>
+                                   <div key={data?._id} onClick={()=>setViewSubSection(data)} className="flex cursor-pointer items-center justify-between gap-x-3 border-b-2 border-b-richblack-600 py-2">
+                                        <div className="flex items-center gap-x-3 py-2">
+                                            <RxDropdownMenu className="text-2xl text-richblack-50" />
+                                            <p className="font-semibold text-richblack-50">{data?.title}</p>
                                         </div>
-                                        <div className="flex items-center gap-x-3">
+                                        <div className="flex items-center gap-x-3"
+                                        onClick={(e)=>e.stopPropagation()}>
                                             <button onClick={()=>setEditSubSection({...data,sectionId:section._id})}> 
-                                                <MdModeEditOutline/>
+                                                <MdModeEditOutline className="text-xl text-richblack-300"/>
                                             </button>
                                             <button onClick={()=>setModal({
                                                 text1:"Delete this Sub Section",
@@ -74,15 +98,15 @@ export default function NestedViewComponent({handleChangeEditSection}){
                                                 btn1Handler:()=>handleDeleteSubSection(data._id,section._id),
                                                 btn2Handler:()=>setModal(null),
                                             })}>
-                                                <RiDeleteBin6Line/>
+                                                <RiDeleteBin6Line className="text-xl text-richblack-300"/>
                                             </button>
                                         </div>
                                    </div> 
                                 ))
                             }
-                            <button className="mt-4 flex-items-center gap-x-2 text-yellow-50" 
-                                onClick={setAddSubSection(section._id)}>
-                                <IoMdAdd className="text-yellow-50"/>
+                            <button className="mt-3 flex items-center gap-x-1 text-yellow-50" 
+                                onClick={()=>setAddSubSection(section._id)}>
+                                <IoMdAdd className="text-yellow-50 text-lg"/>
                                 <p>Add Lecture</p>
                             </button>
                         </div>
@@ -107,7 +131,7 @@ export default function NestedViewComponent({handleChangeEditSection}){
                 />)
                 : (<div></div>)
             }
-            
+              
             {
                     modal ? (<Modal modalData={modal}/>) : (<div></div>)
             }
