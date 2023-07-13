@@ -55,7 +55,7 @@ const SideBar=()=>{
                     <button onClick={()=>
                         setModal({
                             text1:"Are You Sure ?",
-                            text2:"You Will be Logged Out Of Our Account",
+                            text2:"You Will be Logged Out Of Your Account",
                             btn1Text:"Logout",
                             btn2Text:"Cancel",
                             btn1Handler:()=>dispatch(logout(navigate)),

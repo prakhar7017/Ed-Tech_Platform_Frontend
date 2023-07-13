@@ -14,6 +14,8 @@ import DashBoard from "./Pages/DashBoard";
 import PrivateRoute from "./Components/Common/PrivateRoute";
 import MyProfile from "./Pages/MyProfile";
 import Settings from "./Components/Core/Dashboard/Settings/Settings";
+import MyCourses from "./Components/Core/Dashboard/MyCourses";
+import EditCourse from "./Components/Core/Dashboard/EditCourse/EditCourse";
 import Error from "./Pages/Error"
 import EnrolledCourses from "./Components/Core/Dashboard/EnrolledCourses";
 import Cart from "./Components/Core/Dashboard/Cart/Cart"
@@ -57,8 +59,10 @@ function App() {
                 user?.accountType===ACCOUNT_TYPE.INSTRUCTOR && (
                   <>
                   <Route path="/dashboard/add-course" element={<AddCourse/>}></Route>
-                  
-                  <Route path="/dashboard/cart" element={<Cart/>}></Route>
+                  {/* <Route path="/dashboard/cart" element={<Cart/>}></Route>
+                  </> */}
+                  <Route path="/dashboard/my-courses" element={<MyCourses/>}></Route>
+                  <Route path="/dashboard/edit-course/:courseId" element={<EditCourse/>}></Route>
                   </>
                 )
               }

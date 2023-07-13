@@ -65,10 +65,12 @@ export default function CourseBuilder(){
     const goToNext=()=>{
         if(course.courseContent.length===0){
             toast.error("Please Add Atleast One Section")
+            return;
         }
 
         if(course.courseContent.some((section)=>section.subSection.length===0)){
             toast.error("Please Add Atleast One lecture in Section")
+            return;
         }
 
         dispatch(setStep(3));

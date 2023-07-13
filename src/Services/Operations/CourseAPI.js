@@ -271,6 +271,7 @@ export const fetchInstructorCourses = async (token) => {
       "GET",
       GET_ALL_INSTRUCTOR_COURSES_API,
       null,
+      null,
       {
         Authorization: `Bearer ${token}`,
       }
@@ -292,7 +293,7 @@ export const fetchInstructorCourses = async (token) => {
 export const deleteCourse = async (data, token) => {
   const toastId = toast.loading("Loading...")
   try {
-    const response = await apiConnector("DELETE", DELETE_COURSE_API, data, {
+    const response = await apiConnector("DELETE", DELETE_COURSE_API, data,null,{
       Authorization: `Bearer ${token}`,
     })
     console.log("DELETE COURSE API RESPONSE............", response)
@@ -319,6 +320,7 @@ export const getFullDetailsOfCourse = async (courseId, token) => {
       {
         courseId,
       },
+      null,
       {
         Authorization: `Bearer ${token}`,
       }
