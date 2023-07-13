@@ -11,6 +11,8 @@ import {RiDeleteBin6Line} from "react-icons/ri";
 import Modal from "../../../../Common/Modal";
 import { deleteCourse, fetchInstructorCourses } from "../../../../../Services/Operations/CourseAPI";
 import { useNavigate } from "react-router-dom";
+import {formattedDate} from "../../../../../Util/DateFormatter"
+const TRUNCATE_LENGTH = 30
 
 
 export default function CourseTable({courses,setCourses}){
@@ -35,7 +37,7 @@ export default function CourseTable({courses,setCourses}){
 
     return(
         <div className="lg:mt-12">
-            <Table className="border border-richblack-800">
+            <Table className="rounded-xl border border-richblack-800 ">
                 <Thead>
                     <Tr className="flex lg:flex-row justify-between gap-x-10 px-6 py-2 items-center text-sm font-medium text-richblack-100 uppercase rounded-t-md border-b border-richblack-800">
                         <Th className="flex-1 text-left">Courses</Th>
@@ -47,27 +49,35 @@ export default function CourseTable({courses,setCourses}){
                 <Tbody>
                     {
                         courses.length===0 ? (
-                            <Tr>
+                            <Tr className="py-10 text-center text-2xl font-medium text-richblack-100">
                                 <Td>No Courses Found</Td>
                             </Tr>
                         ):(
                             courses?.map((course)=>(
-                                <Tr key={course._id} className="flex gap-x-14 border-b  border-richblack-800 py-8 px-6 justify-between  text-richblack-100 ">
+                                <Tr key={course._id} className="flex gap-x-10 border-b border-richblack-800 px-6 py-8">
                                     <Td className="flex flex-1 gap-x-4">
                                         <img src={course?.thumbnail}
+                                        alt={course?.courseName}
                                         className="h-[150px] w-[220px] rounded-lg object-cover"/>
                                         <div className="flex flex-col justify-between ">
                                             <p className="text-lg font-semibold text-richblack-5 ">{course?.courseName}</p>
-                                            <p className="text-sm text-richblack-300">{course?.courseDescription}</p> 
-                                            <p>Created At</p>
+                                            <p className="text-sm text-richblack-300">
+                                                {
+                                                    course?.courseDescription.split(" ").length>TRUNCATE_LENGTH ? course.courseDescription.split(" ").slice(0,TRUNCATE_LENGTH).join(" ")+ "..." :
+                                                    course?.courseDescription
+                                                }
+                                            </p> 
+                                            <p className="text-[12px] text-white">
+                                                Created At: {formattedDate(course.createdAt)}
+                                            </p>
                                             {
                                                 course.status===COURSE_STATUS.DRAFT ? 
                                                 (<div className="flex lg:flex-row rounded-full w-fit items-center gap-2 bg-richblack-700 px-2 py-[2px] text-[0.75rem] font-medium text-pink-100">
-                                                    <AiOutlineClockCircle/>
+                                                    <AiOutlineClockCircle size={14}/>
                                                     Drafted
                                                 </div>):(
                                                     <div className="flex lg:flex-row rounded-full w-fit items-center gap-2 bg-richblack-700 px-2 py-[2px] text-[0.75rem] font-medium text-yellow-100">
-                                                        <AiFillCheckCircle/>
+                                                        <AiFillCheckCircle size={8}/>
                                                         Published
                                                     </div>
                                                 ) 

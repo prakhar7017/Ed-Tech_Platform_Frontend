@@ -18,7 +18,7 @@ const Home=()=>{
             <div className="relative flex flex-col w-11/12 mx-auto items-center text-white justify-between max-w-maxContent">
                  <Link to={"/signup"}>
                 <div className="group mt-16 p-1 mx-auto rounded-full bg-richblack-800 font-bold text-richblack-200 transition-all duration-200 hover:scale-95 w-fit">
-                    <div className="flex itens-center justify-between gap-1 rounded-full px-10 py-[5px] transition-all duration-200 hover:bg-richblack-900">
+                    <div className="flex itens-center justify-between gap-2 rounded-full px-10 py-[5px] transition-all duration-200 hover:bg-richblack-900">
                         <p >Become an Instructor</p>
                         <AiOutlineArrowRight/>
                     </div>
