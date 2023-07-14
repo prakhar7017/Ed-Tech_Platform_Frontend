@@ -1,5 +1,6 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./Pages/Home";
+import Catalog from "./Pages/Catalog";
 import Navbar from "./Components/Common/Navbar";
 import "./App.css";
 import Login from "./Components/Core/Auth/Login";
@@ -33,6 +34,7 @@ function App() {
       <Navbar/>
       <Routes>
           <Route path="/" element={<Home/>}/>
+          <Route path="/catalog/:categoryName" element={<Catalog/>}/>
           <Route path="/login" element={<OpenRoute><Login/></OpenRoute>}></Route>
           <Route path="/signup" element={<OpenRoute><SignUp/></OpenRoute>}></Route>
           <Route path="/forgot-password" element={<OpenRoute><ForgotPassword/></OpenRoute>}></Route>
