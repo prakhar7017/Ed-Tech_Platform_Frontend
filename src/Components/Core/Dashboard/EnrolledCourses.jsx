@@ -10,7 +10,8 @@ const EnrolledCourses=()=>{
     const getEnrolledCourse=async()=>{
         try {
             const response=await getUserEnrolledCourse(token);
-            setEnrolledCourses(response);
+            // console.log(response);
+            setEnrolledCourses(response.data.courses);
         } catch (error) {
             console.log(error)
         }
@@ -18,6 +19,8 @@ const EnrolledCourses=()=>{
     useEffect(()=>{
         getEnrolledCourse()
     },[])
+
+    // console.log(enrolledCourses);
 
     return(
         <div className="text-white">
@@ -27,7 +30,7 @@ const EnrolledCourses=()=>{
                     <div>
                         Loading....
                     </div>
-                ): (!enrolledCourses.length ? (<p>You have not enrolled in any course yet.</p>) :(<AllEnrolledCourses enrolledCourses={enrolledCourses}/>))
+                ): (!enrolledCourses ? (<p>You have not enrolled in any course yet.</p>) :(<AllEnrolledCourses enrolledCourses={enrolledCourses}/>))
             }
         </div>
     )

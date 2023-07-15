@@ -10,11 +10,9 @@ const {GET_USER_DETAILS_API,GET_USER_ENROLLED_COURSES_API} = profileEndpoints
 
 export async function getUserEnrolledCourse(token){
     const toastId=toast.loading("Loading");
-    const result=[];
+    let result=[];
     try {
-        const response=await apiConnector("GET",GET_USER_ENROLLED_COURSES_API,null,{Authorization:`Bearer ${token}`})
-
-        console.log(response.data)
+        const response=await apiConnector("GET",GET_USER_ENROLLED_COURSES_API,null,null,{Authorization: `Bearer ${token}`})
 
         if(!response.data.success){
             throw new Error(response.data.message)

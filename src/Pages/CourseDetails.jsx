@@ -17,7 +17,7 @@ export default function CourseDetails(){
     }
      return (
         <div className="flex items-center">
-            <button className="bg-yellow-25 p-6 mt-10" onClick={()=>handleBuyCourse}>
+            <button className="bg-yellow-25 p-6 mt-10" onClick={handleBuyCourse}>
                 Buy now 
             </button>
         </div>

@@ -36,17 +36,18 @@ export async function buyCourse(token,courses,userDetails,navigate,dispatch){
         const orderResponse=await apiConnector("POST",COURSE_PAYMENT_API,{courses},null,{
             Authorization: `Bearer ${token}`,
           })
-
-        if(!orderResponse){
+          console.log(orderResponse);
+        if(!orderResponse.data.success){
+            toast.error(orderResponse.data.message);
             throw new Error(orderResponse.data.message);
         }
 
         //options
         const option={
             key:process.env.RAZORPAY_KEY,
-            currency:orderResponse.data.data.currency,
-            amount:`${orderResponse.data.data.amount}`,
-            order_id:orderResponse.data.data.id,
+            currency:orderResponse?.data?.data?.currency,
+            amount:`${orderResponse?.data?.data?.amount}`,
+            order_id:orderResponse?.data?.data?.id,
             name:"StudyNotion",
             description:"Thank You For Purchasing The Course",
             prefill:{
@@ -60,6 +61,13 @@ export async function buyCourse(token,courses,userDetails,navigate,dispatch){
                 verifyPayment({...response,courses},token,navigate,dispatch)
             },
         }
+
+        const paymentObject=new window.Razorpay(option);
+        paymentObject.open();
+        paymentObject.on("payment.failed",function(response){
+            toast.error("OOPPS... Payment Failed")
+            console.log(response.error);
+        })
 
     } catch (error) {
         console.log(error);
@@ -86,12 +94,13 @@ async function verifyPayment(bodyData,token,navigate,dispatch){
     const toastId=toast.loading("Verifying Payment");
     dispatch(setPaymentLoading(true));
     try {
-        const response=await apiConnector("POST",COURSE_VERIFY_API,bodyData,{
+        const response=await apiConnector("POST",COURSE_VERIFY_API,bodyData,null,{
             Authorization: `Bearer ${token}`
         })
-
+        console.log(response);
         if(!response.data.success){
             throw new Error(response.data.message)
+            return;
         }
         toast.success("Payment SuccessFull..!Happy Learning");
         navigate("/dashboard/enrolled-courses")
