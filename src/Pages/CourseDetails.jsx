@@ -31,14 +31,13 @@ export default function CourseDetails(){
     const dispatch=useDispatch();
 
     const handelisActive=(id)=>{
-        !isActive.includes(id) ? isActive.push(id) : isActive.filter((element)=>element!=id)
+        setActive(!isActive.includes(id) ? isActive.concat([id]) : isActive.filter((element)=>element!=id))
     }
 
     useEffect(()=>{
         const getCourseData=async ()=>{
             try {
                 const result=await fetchCourseDetails(courseId);
-                console.log(result);
                 setCourseData(result);
             } catch (error) {
                 console.log("Could not fetch course Details")
@@ -47,10 +46,10 @@ export default function CourseDetails(){
         getCourseData();
     },[courseId])
 
+
     useEffect(()=>{
-        console.log(courseData);
         const getAvgRating=async()=>{
-            const count=await GetAvgRating(courseData?.data?.data?.CourseDetails?.ratingAndReviews)
+            const count=await GetAvgRating(ratingAndReviews)
             setAvgReviewCount(count);
         }
         getAvgRating();
@@ -123,12 +122,13 @@ export default function CourseDetails(){
 
 
     const {
-        _id,category,courseContent,instructions,instructor,courseDescription,courseName,price,ratingAndReviews,status,studentEnrolled,tags,thumbnail,whatYouWillLearn,createdAt=null}=courseData?.data?.courseDetails;
+        category,courseContent,instructions,instructor,courseDescription,courseName,price,ratingAndReviews,status,studentEnrolled,tags,thumbnail,whatYouWillLearn,createdAt=null}=courseData?.data?.courseDetails;
+
 
      return (
-        <div className="text-white">
+        <div className="text-richblack-5">
             <div className="relative bg-richblack-800 w-full">
-                <div className="mx-auto flex flex-col min-h-[450px] py-8 pl-4 lg:mx-0 lg:justify-center lg:gap-y-6 lg:py-0 xl:max-w-[810px]">
+                <div className="mx-auto flex flex-col min-h-[28.125rem] py-8 pl-4 lg:mx-0 lg:justify-center lg:gap-y-6 lg:py-0 xl:max-w-[50.625rem]">
                     <p className="text-4xl font-bold text-richblack-5 sm:text-[2.625rem]">{courseName}</p>
                     <p className={`text-richblack-200`}>{courseDescription}</p>
                     <div className="text-md flex lg:flex-col flex-wrap  gap-2 text-lg">
@@ -158,48 +158,45 @@ export default function CourseDetails(){
                 </div>
             </div>
 
-            <div>
-                <div>
-                    <p>What you'll learn</p>
-                    <p>{`${whatYouWillLearn}`}</p>
+            <div className="flex lg:flex-col mx-auto lg:w-[78.75rem]  px-4 text-start text-richblack-5">
+                <div className="mx-auto max-w-maxContentTab lg:mx-0 xl:max-w-[50.625rem] border border-richblack-600 p-8 my-8 flex flex-col justify-between gap-y-4 ">
+                    <p className="text-[2rem] font-bold  ">What you'll learn</p>
+                    <p className="text-[1.5rem] font-medium ">{`${whatYouWillLearn}`}</p>
                 </div>
 
-                <div>
-                    <p>Course Content</p>
-                    <div>
-                        <div>
+                <div className="flex flex-col justify-between gap-3 w-[51.875rem] text-richblack-5 ">
+                    <p className="text-[1.75rem] font-bold">Course Content</p>
+                    <div className="flex lg:flex flex-wrap gap-2 justify-between items-center">
+                        <div className="flex gap-2">
                             <span>{`${courseContent.length} section(s)`}</span>
                             <span>{`${totalLecture} lecture(s)`}</span>
                             <span>{`${courseData?.data?.totalDuration}s total length`}</span>
                         </div>
                         <div>
-                            <button onClick={()=>setActive([])}>
+                            <button onClick={()=>setActive([])} className="text-yellow-25">
                                 Collapse all sections
                             </button>
                         </div>
                     </div>
-                    <div>
-                        <Accordian id={_id} sections={courseContent} isActive={isActive} handelisActive={handelisActive}/>
+                    <div className="py-4 max-h-max ">
+                            {
+                                courseContent?.map((course,index)=>(
+                                    <Accordian key={index} course={course} isActive={isActive} handelisActive={handelisActive}/>
+                                ))
+                            }
                     </div>
 
                 </div>
 
-                <div>
-                    <p>Author</p>
-                    <div>
-                        <img src={user.image} height={50} width={50}/>
-                        <p>{`${instructor.firstName}`} {`${instructor.lastName}`}</p>
+                <div className="mb-12 py-4">
+                    <p  className="text-[28px] font-semibold">Author</p>
+                    <div  className="flex items-center gap-4 py-4">
+                        <img src={instructor.image}  alt="author" className="h-14 w-14 rounded-full object-cover"/>
+                        <p className="text-lg">{`${instructor.firstName}`} {`${instructor.lastName}`}</p>
                     </div>
-                    <p>Developer</p>
+                    <p className="text-richblack-50">{instructor?.additionalDetails?.about}</p>
                 </div>
             </div>
-
-
-
-            {/* <button className="bg-yellow-25 p-6 mt-10" onClick={handleBuyCourse}>
-                Buy now 
-            </button> */}
-
             <Footer/>
             {
                 confirmationModal && <Modal modalData={confirmationModal}/>
