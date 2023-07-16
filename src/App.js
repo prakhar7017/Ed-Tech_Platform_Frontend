@@ -24,6 +24,7 @@ import Cart from "./Components/Core/Dashboard/Cart/Cart"
 import AddCourse from "./Components/Core/Dashboard/AddCourses/AddCourse";
 import {ACCOUNT_TYPE} from "./Util/Contants"
 import { useDispatch, useSelector } from "react-redux";
+import ViewCourse from "./Pages/ViewCourse";
 
 function App() {
 
@@ -69,8 +70,26 @@ function App() {
                   <Route path="/dashboard/edit-course/:courseId" element={<EditCourse/>}></Route>
                   </>
                 )
-              }
-              
+              }  
+          </Route>
+
+          <Route element={
+            <PrivateRoute>
+              <ViewCourse/>
+            </PrivateRoute>
+          }>
+            {
+              user?.accountType===ACCOUNT_TYPE.STUDENT && (
+                <>
+                  <Route
+                    path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId"
+                    element={<VideoDetails/>}
+                  >
+                  </Route>
+                </>
+              )
+            }
+
           </Route>
 
           <Route path="*" element={<OpenRoute><Error/></OpenRoute>}></Route>
