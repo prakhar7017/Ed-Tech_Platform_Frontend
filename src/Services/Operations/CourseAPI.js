@@ -347,7 +347,7 @@ export const markLectureAsComplete = async (data, token) => {
   console.log("mark complete data", data)
   const toastId = toast.loading("Loading...")
   try {
-    const response = await apiConnector("POST", LECTURE_COMPLETION_API, data, {
+    const response = await apiConnector("POST", LECTURE_COMPLETION_API, data,null, {
       Authorization: `Bearer ${token}`,
     })
     console.log(
@@ -374,7 +374,7 @@ export const createRating = async (data, token) => {
   const toastId = toast.loading("Loading...")
   let success = false
   try {
-    const response = await apiConnector("POST", CREATE_RATING_API, data, {
+    const response = await apiConnector("POST", CREATE_RATING_API, data,null,{
       Authorization: `Bearer ${token}`,
     })
     console.log("CREATE RATING API RESPONSE............", response)

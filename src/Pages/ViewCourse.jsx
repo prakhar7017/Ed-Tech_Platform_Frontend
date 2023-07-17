@@ -5,8 +5,8 @@ import { Outlet, useParams } from "react-router-dom";
 import { getFullDetailsOfCourse } from "../Services/Operations/CourseAPI";
 import { setCourse } from "../Slices/courseSlice";
 import { setCompletedLectures, setCourseSectionData, setEntireCourseData, setTotalNoOfLectures } from "../Slices/ViewCourseSlice";
-import VideoDetailsSideBar from "../Components/Core/Course/VideoDetailsSideBar";
-import CourseReviewModal from "../Components/Common/CourseReviewModal";
+import VideoDetailsSideBar from "../Components/Core/ViewCourse/VideoDetailsSideBar";
+import CourseReviewModal from "../Components/Core/ViewCourse/CourseReviewModal";
 
 export default  function ViewCourse(){
 
@@ -19,6 +19,7 @@ export default  function ViewCourse(){
     useEffect(()=>{
         const getFullDetails=async()=>{
             const result=await getFullDetailsOfCourse(courseId,token);
+            console.log(result);
             if(result){
                 dispatch(setCourseSectionData(result?.courseDetails?.courseContent));
                 dispatch(setEntireCourseData(result?.courseDetails));
@@ -40,7 +41,7 @@ export default  function ViewCourse(){
                     <Outlet/>
                 </div>
             </div>
-            {reviewModal && <CourseReviewModal/>}
+            {reviewModal && <CourseReviewModal setReviewModal={setReviewModal}/>}
         </>
     )
 }

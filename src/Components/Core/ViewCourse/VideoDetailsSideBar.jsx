@@ -8,6 +8,7 @@ import { Toaster } from "react-hot-toast";
 import { AiOutlineDown } from "react-icons/ai"
 
 export default function VideoDetailsSideBar({setReviewModal}){
+
     const navigate=useNavigate();
     const loaction=useLocation();
 
@@ -42,7 +43,7 @@ export default function VideoDetailsSideBar({setReviewModal}){
                 <div>
                     <div>
                         <div onClick={()=>navigate("/dashboard/enrolled-courses")}>
-                            <IoChevronBackCircle/>
+                            {/* <IoChevronBackCircle/> */}
                         </div>
                     </div>
                     <div>

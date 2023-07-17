@@ -25,6 +25,7 @@ import AddCourse from "./Components/Core/Dashboard/AddCourses/AddCourse";
 import {ACCOUNT_TYPE} from "./Util/Contants"
 import { useDispatch, useSelector } from "react-redux";
 import ViewCourse from "./Pages/ViewCourse";
+import VideoDetailsSideBar from "./Components/Core/ViewCourse/VideoDetailsSideBar";
 
 function App() {
 
@@ -83,7 +84,7 @@ function App() {
                 <>
                   <Route
                     path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId"
-                    element={<VideoDetails/>}
+                    element={<VideoDetailsSideBar/>}
                   >
                   </Route>
                 </>
