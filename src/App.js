@@ -27,6 +27,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ViewCourse from "./Pages/ViewCourse";
 import VideoDetailsSideBar from "./Components/Core/ViewCourse/VideoDetailsSideBar";
 import VideoDetails from "./Components/Core/ViewCourse/VideoDetails";
+import Instructor from "./Components/Core/Dashboard/InstructorDashboard/Instructor";
 
 function App() {
 
@@ -70,6 +71,7 @@ function App() {
                   </> */}
                   <Route path="/dashboard/my-courses" element={<MyCourses/>}></Route>
                   <Route path="/dashboard/edit-course/:courseId" element={<EditCourse/>}></Route>
+                  <Route path="/dashboard/instructor" element={<Instructor/>}></Route>
                   </>
                 )
               }  
