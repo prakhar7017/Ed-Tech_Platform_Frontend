@@ -11,6 +11,7 @@ import LearningMoreSection from "../Components/Core/HomePage/LearningMoreSection
 import InstructorSection from "../Components/Core/HomePage/InstructorSection";
 import ExploreMore from "../Components/Core/HomePage/ExploreMore";
 import Footer from "../Components/Common/Footer";
+import ReviewSlider from "../Components/Common/ReviewSlider";
 const Home=()=>{
     return (
         <div>
@@ -139,6 +140,7 @@ const Home=()=>{
                 <InstructorSection/>
 
                 <h2 className="text-center text-4xl font-semibold mt-10">Review From Other Learners</h2>
+                <ReviewSlider/>
             </div>
 
             {/* footer  */}

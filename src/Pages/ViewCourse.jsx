@@ -35,7 +35,7 @@ export default  function ViewCourse(){
     },[])
     return (
         <>
-            <div>
+            <div className="text-white">
                 <VideoDetailsSideBar setReviewModal={setReviewModal}/>
                 <div>
                     <Outlet/>

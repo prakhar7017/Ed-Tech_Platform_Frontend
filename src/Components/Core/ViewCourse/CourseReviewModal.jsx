@@ -52,7 +52,7 @@ export default function CourseReviewModal({setReviewModal}){
                         </div>
 
                         <form
-                        onSubmit={handleSubmit(handleOnSubmit)}>
+                        onSubmit={handleSubmit(handleOnSubmit())}>
 
                             <ReactStars
                                 count={5}

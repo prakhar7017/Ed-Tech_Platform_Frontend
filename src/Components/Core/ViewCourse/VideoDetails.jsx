@@ -4,7 +4,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom"
 import {markLectureAsComplete} from "../../../Services/Operations/CourseAPI"
 import { updateCompletedLectures } from "../../../Slices/ViewCourseSlice";
 import { Player } from 'video-react';
-import '~video-react/dist/video-react.css';
+import 'video-react/dist/video-react.css';
 import {BsFillCollectionPlayFill} from "react-icons/bs"
 import IconButton from "../../Common/IconButton";
 export default function VideoDetails(){
@@ -14,7 +14,7 @@ export default function VideoDetails(){
     const loaction=useLocation();
 
     const {courseId,sectionId,subSectionId}=useParams();
-    const {token}=useSelector((state)=>state.token)
+    const {token}=useSelector((state)=>state.auth)
     const {courseSectionData,courseEntireData,completedLectures,totalNoOfLectures}=useSelector((state)=>state.viewCourse);
 
     const [videoData,setVideoData]=useState([]);
@@ -115,7 +115,9 @@ export default function VideoDetails(){
         const result=await markLectureAsComplete({
             courseId:courseId,subSectionId:subSectionId
         },token)
+        console.log(result);
         setLoading(false);
+
         if(result){
             dispatch(updateCompletedLectures(result));
         }
