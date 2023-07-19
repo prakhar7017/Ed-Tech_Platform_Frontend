@@ -28,12 +28,20 @@ import ViewCourse from "./Pages/ViewCourse";
 import VideoDetailsSideBar from "./Components/Core/ViewCourse/VideoDetailsSideBar";
 import VideoDetails from "./Components/Core/ViewCourse/VideoDetails";
 import Instructor from "./Components/Core/Dashboard/InstructorDashboard/Instructor";
-
+import { useEffect } from "react";
+import getUserDetails from "./Services/Operations/ProfileAPI";
 function App() {
 
   const dispatch=useDispatch();
   const navigate=useNavigate();
   const {user}=useSelector((state)=>state.profile)
+
+  useEffect(()=>{
+      if(localStorage.getItem("token")){
+        const token=JSON.parse(localStorage.getItem("token"));
+        dispatch(getUserDetails(token,navigate));
+      }
+    })
   return (
     <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter ">
       <Navbar/>
@@ -41,13 +49,15 @@ function App() {
           <Route path="/" element={<Home/>}/>
           <Route path="/catalog/:categoryName" element={<Catalog/>}/>
           <Route path="/courses/:courseId" element={<CourseDetails/>}/>
+          <Route path="/about" element={<OpenRoute><About/></OpenRoute>}></Route>
+          <Route path="/contact" element={<OpenRoute><ContactUs/></OpenRoute>}></Route>
+
           <Route path="/login" element={<OpenRoute><Login/></OpenRoute>}></Route>
           <Route path="/signup" element={<OpenRoute><SignUp/></OpenRoute>}></Route>
+          
           <Route path="/forgot-password" element={<OpenRoute><ForgotPassword/></OpenRoute>}></Route>
           <Route path="/update-password/:id" element={<OpenRoute><UpdatePassword/></OpenRoute>}></Route>
           <Route path="/verify-email" element={<OpenRoute><VerifyEmail/></OpenRoute>}></Route>
-          <Route path="/about" element={<OpenRoute><About/></OpenRoute>}></Route>
-          <Route path="/contact" element={<OpenRoute><ContactUs/></OpenRoute>}></Route>
 
           <Route element={<PrivateRoute><DashBoard/></PrivateRoute>}>
               <Route path="/dashboard/my-profile" element={<MyProfile/>}></Route>

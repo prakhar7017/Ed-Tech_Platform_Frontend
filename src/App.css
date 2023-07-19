@@ -66,3 +66,12 @@ html,body{
        transform: rotate(45deg) rotateX(-385deg) rotateY(385deg);
     }
  }
+
+.details > summary {
+   list-style: none;
+}
+
+.details > summary::-webkit-details-maker{
+   display: none;
+   
+}
