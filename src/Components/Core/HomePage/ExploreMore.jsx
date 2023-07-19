@@ -25,7 +25,8 @@ const ExploreMore=()=>{
                 <p>Learn to Build Anything You Can Imagine</p>
             </div>
 
-            <div className="flex flex-row rounded-full bg-richblack-800 mb-5 border-richblack-100 mt-5 px-1 py-1 drop-shadow-[0_1.5px_rgba(255,255,255,0.25)]">
+            <div className=" hidden lg:flex flex-row
+            mx-auto w-max rounded-full bg-richblack-800 border-richblack-100 -mt-5 p-1 drop-shadow-[0_1.5px_rgba(255,255,255,0.25)] gap-5">
                 {
                     tabName.map((element,index)=>{
                         return (

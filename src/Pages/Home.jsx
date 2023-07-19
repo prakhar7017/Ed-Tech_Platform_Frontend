@@ -16,17 +16,18 @@ const Home=()=>{
     return (
         <div>
             {/* section 1 */}
-            <div className="relative flex flex-col w-11/12 mx-auto items-center text-white justify-between max-w-maxContent">
+            <div className="relative flex 
+            gap-8 flex-col w-11/12 mx-auto items-center text-white justify-between max-w-maxContent">
                  <Link to={"/signup"}>
-                <div className="group mt-16 p-1 mx-auto rounded-full bg-richblack-800 font-bold text-richblack-200 transition-all duration-200 hover:scale-95 w-fit">
-                    <div className="flex itens-center justify-between gap-2 rounded-full px-10 py-[5px] transition-all duration-200 hover:bg-richblack-900">
+                <div className="group mt-16 p-1 mx-auto rounded-full bg-richblack-800 font-bold text-richblack-200 transition-all duration-200 hover:scale-95 w-fit drop-shadow-[0_1.5px_rgba(255,255,255,0.25)] hover:drop-shadow-none">
+                    <div className="flex items-center justify-between gap-2 rounded-full px-10 py-[5px] transition-all duration-200 hover:bg-richblack-900">
                         <p >Become an Instructor</p>
                         <AiOutlineArrowRight/>
                     </div>
                 </div>
                 </Link>
 
-                <div className="text-center font-semibold text-4xl mt-7">
+                <div className="text-center font-semibold text-4xl ">
                     Empower Your Future with  <HighLightedText text={"Coding Skills"}/>
                 </div>
 
@@ -43,33 +44,39 @@ const Home=()=>{
                     </Button>
                 </div>
 
-                <div className="shadow-richblue-50 mx-3 my-12 shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]">
-                    <video muted autoPlay loop style={{boxShadow:"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgb(255, 255, 255) 20px 20px 0px 0px"}}>
+                <div className="mx-3 my-7 shadow-[10px_-5px_50px_-5px] shadow-blue-200">
+                    <video muted autoPlay loop className="shadow-[20px_20px_rgba(255,255,255)]">
                         <source src={BannerVideo} type="video/mp4"/>
                     </video>
                 </div>
                 {/* code Section 1 */}
-             <div className="max-w-6xl max-h-fit py-24 px-32 gap-6">
-                    <CodeBlocks backgroundGradient={gradaint.background} position={"lg:flex-row"} heading={<div className="font-semibold text-4xl ">
-                        Unlock Your <HighLightedText text={"Coding Potential"}/> With Our Online Courses 
-                    </div>}
-                    subheading={"Our courses are designed and taught by industry experts who have years of experience in coding and are passionate about sharing their knowledge with you."}
-                    ctabtn1={{btnText:"Try It Yourself",
-                    linkto:"/signup",
-                    active:true}}
+                <div>
+                    <CodeBlocks 
+                        backgroundGradient={<div className="codeblock1 absolute"></div>} 
+                        position={"lg:flex-row"} 
+                        heading={
+                            <div className="font-semibold text-4xl ">
+                                Unlock Your <HighLightedText text={"Coding Potential"}/> With Our Online Courses 
+                            </div>}
+                        subheading={"Our courses are designed and taught by industry experts who have years of experience in coding and are passionate about sharing their knowledge with you."}
+                        ctabtn1={{btnText:"Try It Yourself",
+                        linkto:"/signup",
+                        active:true}}
 
-                    ctabtn2={{btnText:"Learn More",
-                    linkto:"/login",
-                    active:false}}
+
+                        ctabtn2={{btnText:"Learn More",
+                        linkto:"/login",
+                        active:false}}
                     
-                    codeblocks={`<!DOCTYPE html>\n<html>\nhead><title>Example</\ntitle><linkrel="stylesheet"href="styles.css"\n/head>\nbody>\nh1><ahref="/">Header</a>\n/h1>\nnav><ahref="one/">One</a><ahref="two/">Two</\na><ahref="three/">Three</a>\n/nav>`}
-                    codeColor={"text-yellow-25"}
+                        codeblocks={`<!DOCTYPE html>\n<html>\nhead><title>Example</\ntitle><linkrel="stylesheet"href="styles.css"\n/head>\nbody>\nh1><ahref="/">Header</a>\n/h1>\nnav><ahref="one/">One</a><ahref="two/">Two</\na><ahref="three/">Three</a>\n/nav>`}
+                        codeColor={"text-yellow-25"}
                     />
                 </div>
 
                 {/* code Section 1 */}
-                <div className="max-w-6xl max-h-fit py-24 px-32 gap-6">
-                    <CodeBlocks position={'lg:flex-row-reverse'} heading={<div className="text-4xl font-semibold">
+                <div>
+                    <CodeBlocks backgroundGradient={<div className="codeblock2 absolute"></div>}
+                    position={'lg:flex-row-reverse'} heading={<div className="text-4xl font-semibold">
                     Start <HighLightedText text={" Coding In Seconds"}/>
                     </div>}
                     subheading={"Go ahead, give it a try. Our hands-on learning environment means you'll be writing real code from your very first lesson."}
@@ -92,34 +99,38 @@ const Home=()=>{
             {/* ///////////////////////// /////////////////////////////////////////////////////////// */}
              
             {/* section 2  */}
-            <div className="bg-pure-greys-5 text-richblack-700">
-                <div className="homepage_bg h-[310px]">
+            <div className="bg-pure-greys-5 text-richblack-700 ">
+                <div className="homepage_bg h-[19.375rem]">
 
-                    <div className="w-11/12 max-w-maxContent flex flex-col items-center gap-5 mx-auto justify-between">
-                        <div className="h-[150px]"></div>
-                        <div className="flex flex-row gap-7 text-white">
-                            <Button active={true} linkto={"/signup"}>
-                                Explore Full Catelog
-                                <AiOutlineArrowRight/>
-                            </Button>
-                            <Button active={false} linkto={"/signup"}>
-                                Learn More
-                                <AiOutlineArrowRight/>
-                            </Button>
-                        </div>
+                    <div className="w-11/12 max-w-maxContent flex flex-col items-center mx-auto gap-8 justify-between">
+                        <div className="lg:h-[9.375rem]"></div>
+                            <div className="flex flex-row gap-7 text-white lg:mt-9">
+                                <Button active={true} linkto={"/signup"}>
+                                    <div className="flex items-center gap-2">
+                                        Explore Full Catalog
+                                        <AiOutlineArrowRight />
+                                    </div>
+                                </Button>
+                                <Button active={false} linkto={"/signup"}>
+                                    Learn More
+                                    <AiOutlineArrowRight/>
+                                </Button>
+                            </div>
                     </div>
 
 
                 </div>
 
                 <div className="mx-auto w-11/12 max-w-maxContent flex flex-col items-center justify-between gap-7">
-                    <div className="flex flex-row gap-5 mb-10 mt-[95px]">
-                        <div className="text-4xl font-semibold ">
+                    <div className="flex flex-col justify-between
+                    lg:mt-20 lg:flex-row
+                    lg:gap-0 gap-7 mb-10 mt-[-6.25rem]">
+                        <div className="text-4xl font-semibold lg:w-[45%] ">
                         Get the skills you need for a <HighLightedText text={"job that is in demand."}/>
                         </div>
 
-                        <div className="flex flex-col gap-10 w-[40%] items-start">
-                            <p className="text-[16px]">The modern StudyNotion is the dictates its own terms. Today, to be a competitive specialist requires more than professional skills.</p>
+                        <div className="flex flex-col gap-10 lg:w-[40%] items-start">
+                            <p className="text-[1rem]">The modern StudyNotion is the dictates its own terms. Today, to be a competitive specialist requires more than professional skills.</p>
 
                             <Button active={true} linkto={"/signup"}>
                                 Learn More

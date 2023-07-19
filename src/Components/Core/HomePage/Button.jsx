@@ -7,8 +7,11 @@ const Button=({children,active,linkto,textColor,icon})=>{
     const Icons=editIcon[icon]
     return(
         <Link to={linkto}>
-            <div className={`py-4 px-6   text-lg text-center ${textColor ? `text-${textColor}` :"text-white"} max-w-Contentfit max-h-Contentfit flex flex-row items-center justify-between gap-2 
-            ${active ? "bg-yellow-50":"bg-richblack-800" } px-7 rounded-xl hover:scale-95 transition-all duration-200 font-semibold`}>
+            <div className={`py-3 px-6 sm:text-[1rem] text-[0.813rem] font-bold text-center rounded-md  shadow-[2px_2px_0px_0px_rgba(255,255,255,0.18)] 
+             ${textColor ? `text-${textColor}` :"text-white"} max-w-Contentfit max-h-Contentfit flex flex-row  gap-2 
+            ${active ? "bg-yellow-50 text-black":"bg-richblack-800" }
+            items-center justify-between
+            hover:shadow-none hover:scale-95 transition-all duration-200 `}>
                 {children} 
                 {icon && <Icons/>}
             </div>
