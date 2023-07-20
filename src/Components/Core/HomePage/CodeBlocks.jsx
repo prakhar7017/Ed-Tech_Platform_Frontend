@@ -17,7 +17,7 @@ const CodeBlocks=({heading,position,subheading,ctabtn1,ctabtn2,codeblocks,backgr
 
                 <div className="flex flex-row gap-7 mt-7">
                     <Button active={ctabtn1.active} linkto={ctabtn1.linkto}>
-                        <div className="flex items-centergap-2">
+                        <div className="flex items-center gap-2">
                             {ctabtn1.btnText}
                             <AiOutlineArrowRight/>
                         </div>
