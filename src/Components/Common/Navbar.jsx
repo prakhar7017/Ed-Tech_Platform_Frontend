@@ -21,12 +21,14 @@ const Navbar=()=>{
     const [loading,setLoading]=useState(false);
 
     const fetchSubLinks = async ()=>{
+        setLoading(true);
             try {
                 const data= await apiConnector("GET",Categories.CATEGORIES_API,null,null,null);
                 setSubLinks(data.data.allCategory)
             } catch (error) {
                 console.log(error);
             }
+            setLoading(false);
     }
 
     useEffect(()=>{
@@ -37,21 +39,22 @@ const Navbar=()=>{
         return matchPath({path:route},location.pathname);
     }
     return (
-        <div className="flex h-14 items-center justify-center border-b-[1px] border-richblack-700 bg-richblack-800 ">
-            <div className="w-11/12 flex flex-row max-w-maxContent items-center justify-between mx-auto">
+        <div className="flex h-14 items-center justify-center border-b-[1px] border-richblack-700 bg-richblack-800">
+            <div className="w-11/12 flex flex-row max-w-maxContent items-center justify-between">
                 <Link to="/">
                     <img src={Logo} width={160} height={42} loading="lazy" />
                 </Link>
 
                 {/* nav links  */}
-                <nav>
+                <nav className="hidden md:block">
                     <ul className="flex flex-row gap-x-6 text-white">
                     {NavbarLinks.map((element,index)=>{
                         return (
                             <li key={index}>
                                 {
                                     element.title==="Catalog" ? (
-                                        <div className="flex  items-center gap-x-2 relative group z-10 ">
+                                        <div className={`flex  items-center gap-1 relative group  cursor-pointer ${matchRoute("/catelog/:catelogName")  ? "text-yellow-25"
+                                        : "text-richblack-25"}`}>
                                             <p>{element.title}</p>
                                             <IoIosArrowDropdownCircle/>
 
@@ -94,14 +97,14 @@ const Navbar=()=>{
                 </nav>
 
                 {/* login/signin/dashboard  */}
-                <div className="flex gap-x-4 items-center text-2xl, text-richblack-100">
+                <div className=" hidden md:flex gap-x-4 items-center text-2xl, text-richblack-100">
                     {
                         user && user?.accountType != "Instructor" && (
                             <Link to="/dashboard/cart" className="relative">
-                                <AiOutlineShoppingCart size={"25px"} />
+                                <AiOutlineShoppingCart className="text-2xl text-richblack-100"/>
                                 {
                                     totalItems>0 && (
-                                        <span>
+                                        <span className="absolute -bottom-2 -right-2 grid h-5 w-5 place-items-center overflow-hidden rounded-full bg-richblack-600 text-center text-xs font-bold text-yellow-100">
                                             {totalItems}
                                         </span>
                                     )

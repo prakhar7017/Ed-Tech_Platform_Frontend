@@ -6,8 +6,8 @@ import FrameImage from "../.././assets/Images/frame.png"
 
 const Template=({title,description1,description2,image,formType})=>{
     return (
-        <div className="flex w-11/12 lg:max-w-maxContent py-12 mx-auto gap-x-12 gap-y-0 justify-between">
-            <div className="lg:w-11/12 lg:w-max-[450] mx-auto">
+        <div className="flex flex-col-reverse md:flex-row w-11/12 lg:max-w-maxContent py-12 gap-y-12 mx-auto md:gap-y-0 md:gap-x-12  justify-between">
+            <div className="w-11/12 w-max-[450px] mx-auto md:mx-0">
 
                 <h1 className="text-white font-semibold text-[1.875rem] leading-[2.375rem] tracking-tight">{title}</h1>
 
@@ -24,7 +24,7 @@ const Template=({title,description1,description2,image,formType})=>{
             <div className="relative mx-auto w-11/12 lg:max-w-[450px] md:mx-0">
                 <img src={FrameImage} alt="Pattern"  width={558} height={504} loading="lazy"/>
 
-                <img src={image} alt="Students" width={558} height={504} loading="lazy" className="absolute -top-4 -left-4 z-100"/>
+                <img src={image} alt="Students" width={558} height={504} loading="lazy" className="absolute -top-4 -left-4 z-10"/>
             </div>
         </div>
     )
