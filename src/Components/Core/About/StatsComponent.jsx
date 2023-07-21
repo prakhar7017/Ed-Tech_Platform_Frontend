@@ -5,8 +5,8 @@ const stats=[{count:"5K",label:"Active Students"},{count:"10+",label:"Mentors"},
 const Stats=()=>{
     return (
         <div className="bg-richblack-700">
-            <div>
-                <div className="flex gap-x-4 justify-around items-center">
+            <div className="flex flex-col gap-10 justify-between w-11/12 max-w-maxContent text-white mx-auto ">
+                <div className="flex gap-x-4 justify-around items-center flex-wrap">
                     {stats.map((element,index)=>{
                         return (
                             <div key={index} className="flex flex-col py-10">

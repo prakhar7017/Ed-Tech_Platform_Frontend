@@ -73,7 +73,7 @@ const SignupForm=()=>{
         <Tab tabData={tabData} field={accountType} setfield={setAccountType}/>
 
         <form onSubmit={handelOnSubmit} className="flex flex-col w-full gap-y-4">
-            <div className="flex gap-x-4">
+            <div className="flex gap-x-4 w-full">
                 <label>
                     <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
                     First Name <sup className="text-pink-200">*</sup>
@@ -84,7 +84,7 @@ const SignupForm=()=>{
                         style={{
                             boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                         }}
-                        className="w-[13.25rem] rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5"
+                        className="w-full  lg:w-[13.25rem] rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5"
 
                     />
                 </label>
@@ -98,7 +98,7 @@ const SignupForm=()=>{
                         style={{
                             boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                         }}
-                        className="w-[13.25rem] rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5"
+                        className=" w-full lg:w-[13.25rem] rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5"
 
                     />
                 </label>
@@ -113,7 +113,7 @@ const SignupForm=()=>{
                 style={{
                     boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)"
                 }}
-                className="lg:w-[27.75rem] rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5"
+                className=" w-[60%]  lg:w-[27.75rem] rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5"
                 />
             </label>
 
@@ -131,7 +131,7 @@ const SignupForm=()=>{
                         style={{
                             boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)"
                         }}
-                        className="w-[13.25rem] rounded-[0.5rem] bg-richblack-800 p-[12px] pr-10 text-richblack-5"
+                        className=" w-full lg:w-[13.25rem] rounded-[0.5rem] bg-richblack-800 p-[12px] pr-10 text-richblack-5"
                         />
                         <span onClick={()=>setShowPassword((prev)=>!prev)}
                         className="absolute right-3 top-[38px] z-[10] cursor-pointer"
@@ -156,7 +156,7 @@ const SignupForm=()=>{
                         style={{
                             boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)"
                         }}
-                        className="w-[13.25rem] rounded-[0.5rem] bg-richblack-800 p-[12px] pr-10 text-richblack-5"
+                        className=" w-full lg:w-[13.25rem] rounded-[0.5rem] bg-richblack-800 p-[12px] pr-10 text-richblack-5"
                         />
                         <span onClick={()=>setShowConfirmPassword((prev)=>!prev)}
                         className="absolute right-3 top-[38px] z-[10] cursor-pointer"

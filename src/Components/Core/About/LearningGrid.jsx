@@ -46,7 +46,7 @@ const LearningGridArray = [
 
 const LearningGrid=()=>{
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-4 mt-[6.5rem] mx-auto w-11/12 mb-[6.5rem]">
+        <div className="grid grid-cols-1 lg:w-fit lg:grid-cols-4 mt-[6.5rem] mx-auto w-11/12 mb-[6.5rem] p-8">
             {
                 LearningGridArray.map((element,index)=>(
                     <div key={index} className={`${index===0 && "lg:col-span-2 bg-transparent"} ${element.order % 2 === 1 ? "bg-richblack-700":"bg-richblack-800"} ${element.order===3 && "lg:col-start-2"}`}>
@@ -59,7 +59,7 @@ const LearningGrid=()=>{
 
                                     <p className="text-richblack-300 font-medium">{element.description}</p>
 
-                                    <div className="max-w-fit text-richblack-900">
+                                    <div className="max-w-fit text-richblack-900 mt-2 mb-2" >
                                       <Button active={true} linkto={element.BtnLink}>{element.BtnText}</Button>
                                     </div>
 
@@ -67,9 +67,9 @@ const LearningGrid=()=>{
                             )  
                             : 
                             (
-                                <div className="h-[18.375rem] flex flex-col justify-between items-center] text-center py-6 px-6">
-                                    <div className="text-richblack-5 text-lg mt-[2.5rem]">{element.heading}</div>
-                                    <p className="mt-[4rem] text-richblack-300">
+                                <div className="h-[18.375rem] flex flex-col  lg:items-center items-start text-center p-6 mx-auto ">
+                                    <div className="text-richblack-5 text-lg ">{element.heading}</div>
+                                    <p className=" mt-[2rem] lg:mt-[4rem] text-richblack-300">
                                         {element.description}
                                     </p>
                                 </div>

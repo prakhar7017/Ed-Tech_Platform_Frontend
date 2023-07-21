@@ -1,6 +1,6 @@
 export default function Tab ({tabData,field,setfield}){
     return (
-        <div className="lg:flex text-richblack-800 p-1 gap-x-1 my-6 rounded-full lg:max-w-max"         style={{
+        <div className="lg:flex lg:flex-row flex-col  text-richblack-800 p-1 gap-x-1 my-6 rounded-full lg:max-w-max"         style={{
             boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
           }}>
             {

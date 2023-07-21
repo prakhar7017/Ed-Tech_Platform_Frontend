@@ -51,7 +51,7 @@ const LoginForm=()=>{
                 {showPassword ? (<AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF"/>) : (<AiOutlineEye fontSize={24} fill="#AFB2BF"/>)}
             </span>
             <Link to="/forgot-password">
-                <p className="mt-1 ml-auto max-w-max text-xs lg:left-[-50%] text-blue-100">Forgot Password</p>
+                <p className="mt-1 ml-auto max-w-full text-xs text-blue-100">Forgot Password</p>
             </Link>
         </label>
         <button type="submit" className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblue-900 lg:w-[27.75rem]">Sign In</button>
