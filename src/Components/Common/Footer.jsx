@@ -22,7 +22,7 @@ const Community = ["Forums", "Chapters", "Events"];
 const Footer=()=>{
     return (
         <div className="bg-richblack-800">
-            <div className="w-11/12 flex flex-col  lg:flex-row gap-8 items-center justify-between max-w-maxContent text-richblack-400 leading-6 mx-auto relative py-14">
+            <div className="w-11/12 flex flex-col gap-8 items-center justify-between max-w-maxContent text-richblack-400 leading-6 mx-auto relative py-14">
                 <div className="border-b w-[100%] flex flex-col lg:flex-row pb-5 border-richblack-700">
                     <div className="lg:w-[50%] flex flex-wrap flex-row justify-between lg:border-r lg:border-richblack-700 pl-3 lg:pr-5 gap-3">
                         {/* logo  */}
@@ -85,7 +85,7 @@ const Footer=()=>{
                         </div>
                     </div>
                     {/* after border  */}
-                    <div className="lg:w-[50%] flex flex-wrap flex-row justify-between pl-3 lg:pl-5 gap-3">
+                    <div className="lg:w-[50%] flex flex-wrap flex-row items-center justify-between pl-3 lg:pl-5 gap-3">
                     {FooterLink2.map((element,index)=>{
                         return (
                             <div key={index} className="w-[48%] lg:w-[30%] mb-7 lg:pl-0">
@@ -104,7 +104,7 @@ const Footer=()=>{
                     </div>
                 </div>
                 {/* section 2 */}
-                <div className="flex flex-row items-center justify-between w-11/12 max-w-maxContent text-richblack-400 mx-auto text-sm">
+                <div className="flex flex-row flex-wrap items-center justify-between w-11/12 max-w-maxContent text-richblack-400 mx-auto text-sm">
                     <div className="flex justify-between lg:items-start items-center flex-col lg:flex-row gap-3 w-full">
                         <div className="flex flex-row">
                             {BottomFooter.map((element,index)=>{
