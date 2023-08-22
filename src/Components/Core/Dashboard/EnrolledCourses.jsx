@@ -10,8 +10,8 @@ const EnrolledCourses=()=>{
     const getEnrolledCourse=async()=>{
         try {
             const response=await getUserEnrolledCourse(token);
-            // console.log(response);
-            setEnrolledCourses(response.data.courses);
+            const filterPublishCourses=response.filter((element)=>element.status!="Draft")
+            setEnrolledCourses(filterPublishCourses);
         } catch (error) {
             console.log(error)
         }
@@ -20,17 +20,23 @@ const EnrolledCourses=()=>{
         getEnrolledCourse()
     },[])
 
-    // console.log(enrolledCourses);
-
     return(
         <div className="text-white">
-            <div>Enrolled Courses</div>
+            <div className="text-3xl text-richblack-50">Enrolled Courses</div>
             {
                 !enrolledCourses ? (
-                    <div>
-                        Loading....
+                    <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
+                        <div class="spinner">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
                     </div>
-                ): (!enrolledCourses ? (<p>You have not enrolled in any course yet.</p>) :(<AllEnrolledCourses enrolledCourses={enrolledCourses}/>))
+                    
+                ): (!enrolledCourses ? (<p className="grid h-[10vh] w-full place-content-center text-richblack-5">You have not enrolled in any course yet.</p>) :(<AllEnrolledCourses enrolledCourses={enrolledCourses}/>))
             }
         </div>
     )

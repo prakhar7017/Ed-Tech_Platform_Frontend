@@ -41,7 +41,7 @@ function App() {
         const token=JSON.parse(localStorage.getItem("token"));
         dispatch(getUserDetails(token,navigate));
       }
-    })
+    },[])
   return (
     <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter ">
       <Navbar/>
@@ -49,8 +49,8 @@ function App() {
           <Route path="/" element={<Home/>}/>
           <Route path="/catalog/:categoryName" element={<Catalog/>}/>
           <Route path="/courses/:courseId" element={<CourseDetails/>}/>
-          <Route path="/about" element={<OpenRoute><About/></OpenRoute>}></Route>
-          <Route path="/contact" element={<OpenRoute><ContactUs/></OpenRoute>}></Route>
+          <Route path="/about" element={<About/>}></Route>
+          <Route path="/contact" element={<ContactUs/>}></Route>
 
           <Route path="/login" element={<OpenRoute><Login/></OpenRoute>}></Route>
           <Route path="/signup" element={<OpenRoute><SignUp/></OpenRoute>}></Route>

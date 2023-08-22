@@ -40,36 +40,34 @@ export default function Instructor(){
 
     return (
         <div className="text-white">
-            <div>
-                <p>{user?.firstName} {user?.lastName}</p>
-                <p>Let's Start Something New</p>
+            <div className="space-y-2">
+                <p className="text-2xl font-bold text-richblack-5">Hi {user?.firstName} {user?.lastName} 👋</p>
+                <p className="font-medium text-richblack-200">Let's Start Something New</p>
             </div>
             {
                 course?.length > 0 ? (
                     <div>
-                        <div>
-                            <div>
+                        <div className="my-4 flex h-[450px] space-x-4">
                                 <InstructorChart courses={instructorData}/>
-                            </div>
-                            <div>
-                                <p>Statistics</p>
-                                <div>
-                                    <p>Total Courses</p>
-                                    <span>
+                            <div className="flex min-w-[250px] flex-col rounded-md bg-richblack-800 p-6">
+                                <p className="text-lg font-bold text-richblack-5">Statistics</p>
+                                <div className="mt-4 space-y-4">
+                                    <p className="text-lg text-richblack-200">Total Courses</p>
+                                    <span className="text-3xl font-semibold text-richblack-50">
                                         {course.length}
                                     </span>
                                 </div>
                                 <div>
-                                    <p>Total Students</p>
-                                    <span>
+                                    <p className="text-lg text-richblack-200">Total Students</p>
+                                    <span className="text-3xl font-semibold text-richblack-50">
                                         {
                                             totalStudents
                                         }
                                     </span>
                                 </div>
                                 <div>
-                                    <p>Total Income</p>
-                                    <span>
+                                    <p lassName="text-lg text-richblack-200">Total Income</p>
+                                    <span className="text-3xl font-semibold text-richblack-50">
                                         {
                                             totalAmount
                                         }
@@ -77,26 +75,27 @@ export default function Instructor(){
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <div>
-                                <p>Your Courses</p>
+                        <div className="rounded-md bg-richblack-800 p-6">
+                            <div className="flex items-center justify-between">
+                                <p className="text-lg font-bold text-richblack-5">Your Courses</p>
                                 <Link to={"/dashboard/my-courses"}>
-                                    <p>View All</p>
+                                    <p className="text-xs font-semibold text-yellow-50">View All</p>
                                 </Link>
                             </div>
-                            <div>
+                            <div className="my-4 flex items-start space-x-6">
                                 {
                                     course.slice(0,3).map((cur,index)=>(
-                                    <div>
+                                    <div className="w-1/3" key={index}>
                                         <img
                                             src={cur?.thumbnail}
+                                            className="h-[201px] w-full rounded-md object-cover"
                                         />
-                                        <div>
-                                            <p>{cur?.courseName}</p>
-                                            <div>
-                                                <p>{cur?.studentEnrolled.length} students</p>
-                                                <p>|</p>
-                                                <p>{cur?.price}</p>
+                                        <div className="mt-3 w-full">
+                                            <p className="text-sm font-medium text-richblack-50">{cur?.courseName}</p>
+                                            <div className="mt-1 flex items-center space-x-2">
+                                                <p className="text-xs font-medium text-richblack-300">{cur?.studentEnrolled.length} students</p>
+                                                <p className="text-xs font-medium text-richblack-300">|</p>
+                                                <p className="text-xs font-medium text-richblack-300">{cur?.price}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -108,10 +107,12 @@ export default function Instructor(){
                 ) 
                 :
                 (
-                    <div>
-                            <p>No Course Created Yet</p>
+                    <div className="mt-20 rounded-md bg-richblack-800 p-6 py-20">
+                            <p className="text-center text-2xl font-bold text-richblack-5">No Course Created Yet</p>
                             <Link to={"/dashboard/add-course"}>
-                                Add Course
+                                <p className="mt-1 text-center text-lg font-semibold text-yellow-50">
+                                    Add Course
+                                </p>
                             </Link>
                     </div>
                 )

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom"
 import {markLectureAsComplete} from "../../../Services/Operations/CourseAPI"
 import { updateCompletedLectures } from "../../../Slices/ViewCourseSlice";
-import { Player } from 'video-react';
+import { Player,BigPlayButton } from 'video-react';
 import 'video-react/dist/video-react.css';
 import {BsFillCollectionPlayFill} from "react-icons/bs"
 import IconButton from "../../Common/IconButton";
@@ -20,6 +20,7 @@ export default function VideoDetails(){
     const [videoData,setVideoData]=useState([]);
     const [videoEnded,setVideoEnded]=useState(false);
     const [loading,setLoading]=useState(false);
+    const [previewSource, setPreviewSource] = useState("")
 
 
     const playRef=useRef();
@@ -40,6 +41,7 @@ export default function VideoDetails(){
 
                 setVideoData(filterVideoData[0])
                 setVideoEnded(false);
+                setPreviewSource(courseEntireData.thumbnail)
             }
         }
         setVideo();
@@ -123,9 +125,13 @@ export default function VideoDetails(){
         }
     }
     return (
-        <div>
+        <div className="flex flex-col gap-5 text-white">
              {
-                !videoData ? (<div>No Data Found</div>):(
+                !videoData ? (<img
+                    src={previewSource}
+                    alt="Preview"
+                    className="h-full w-full rounded-md object-cover"
+                    />):(
                     <Player
                         ref={playRef}
                         aspectRatio="16:9"
@@ -133,16 +139,23 @@ export default function VideoDetails(){
                         onEnded={()=>setVideoEnded(true)}
                         src={videoData?.videoUrl}
                     >
-                    <BsFillCollectionPlayFill/>
+                    <BigPlayButton  position="center" />
                     {
                         videoEnded && (
-                            <div>
+                            <div  style={{
+                                    backgroundImage:
+                                    "linear-gradient(to top, rgb(0, 0, 0), rgba(0,0,0,0.7), rgba(0,0,0,0.5), rgba(0,0,0,0.1)",
+                                    }}
+                                    className="full absolute inset-0 z-[100] grid 
+                                    grid-cols-1 gap-2 h-full place-content-center font-inter mx-auto place-items-center "
+                            >
                                 {
                                     !completedLectures.includes(subSectionId) && (
                                         <IconButton
                                            disabled={loading}
-                                           onclick={()=>handleOnCompleteLecture}
+                                           onclick={()=>handleOnCompleteLecture()}
                                            text={!loading ? "Mark As Completed":"Loading..."} 
+                                           customClasses="text-xl max-w-max px-4 mx-auto"
                                         />
                                     )
                                 }
@@ -154,16 +167,19 @@ export default function VideoDetails(){
                                            setVideoEnded(false);
                                         }
                                     }}
-                                    text={"Re-Watch"}
+                                    text="Rewatch"
+                                customClasses="text-xl max-w-max px-4 mx-auto mt-2"
                                 />
-                                <div>
+                                <div className="mt-10 flex min-w-[250px] justify-center gap-x-4 text-xl">
                                     {!isFirstVideo() && (
-                                        <button disabled={loading} onClick={goToPrevVideo}>
+                                        <button disabled={loading} onClick={goToPrevVideo}
+                                        className="text-richblack-800 bg-yello-50 max-w-maxContent rounded-md p-2">
                                             Previous
                                         </button>
                                     )}
                                     {!isLastVideo() && (
-                                        <button disabled={loading} onClick={goToNextVideo}>
+                                        <button disabled={loading} onClick={goToNextVideo}
+                                        className="text-richblack-800 bg-yello-50 max-w-maxContent rounded-md p-2">
                                             Next
                                         </button>
                                     )}
@@ -174,8 +190,8 @@ export default function VideoDetails(){
                     </Player>
                 )
              }
-             <h1>{videoData?.title}</h1>
-             <p>{videoData?.description}</p>
+             <h1 className="mt-4 text-3xl font-semibold">{videoData?.title}</h1>
+             <p className="pt-2 pb-6">{videoData?.description}</p>
         </div>
     )
 }

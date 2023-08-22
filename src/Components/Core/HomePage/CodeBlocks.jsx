@@ -1,15 +1,41 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import HighLightedText from "./HighLightedText";
 import Button from "./Button"
 import {AiOutlineArrowRight} from "react-icons/ai"
 import { TypeAnimation } from "react-type-animation"
+import {motion,useAnimation,useInView} from "framer-motion"
 
-const CodeBlocks=({heading,position,subheading,ctabtn1,ctabtn2,codeblocks,backgroundGradient,codeColor})=>{
+const containerVarient={
+    hiddenLeft:{
+        opacity:0,
+        x:"-100vw"
+    },
+    hiddenRight:{
+        opacity:0,
+        x:"100vw"
+    },
+    visible:{
+        opacity:1,
+        x:0
+    }
+}
+
+const CodeBlocks=({heading,position,subheading,ctabtn1,ctabtn2,codeblocks,backgroundGradient,codeColor})=>
+{
+    const ref=useRef(null);
+    const inview=useInView(ref,{once:true});
+    const mainControl=useAnimation();
+    useEffect(()=>{
+        if(inview){
+            mainControl.start("visible")
+        }
+
+    },[inview])
     return (
-        <div className={`flex ${position} my-20 justify-between flex-col  lg:gap-10 gap-10`}>
+        <div ref={ref} className={`flex ${position} my-20 justify-between flex-col  lg:gap-10 gap-10`}>
 
             {/* section 1 */}
-            <div className="w-[100%] lg:w-[50%] flex flex-col gap-8">
+            <motion.div variants={containerVarient} initial={"hiddenLeft"} animate={mainControl} transition={{type:"spring",delay:0.5,duration:1}} className="w-[100%] lg:w-[50%] flex flex-col gap-8">
                 {heading}
                 <div className="text-richblack-300 text-base font-bold w-[85%] -mt-3">
                     {subheading}
@@ -27,9 +53,9 @@ const CodeBlocks=({heading,position,subheading,ctabtn1,ctabtn2,codeblocks,backgr
                         {ctabtn2.btnText}
                     </Button>
                 </div>
-            </div>
+            </motion.div>
             {/* section 2 */}
-            <div className="h-fit code-border flex flex-row py-3 text-[10px] sm:text-sm leading-[18px] sm:leading-6 relative w-[100%] lg:w-[470px] code-border">
+            <motion.div variants={containerVarient} initial={"hiddenRight"} animate={mainControl} transition={{type:"spring",delay:1}} className="h-fit code-border flex flex-row py-3 text-[10px] sm:text-sm leading-[18px] sm:leading-6 relative w-[100%] lg:w-[470px] code-border">
                 {/* hw bg gradient  */}
                 {backgroundGradient}
                 <div className="" style={{backgroundColor:"#000814",boxShadow: "0 0 10px rgba(255, 255, 255, 0.5)"}}>
@@ -58,7 +84,7 @@ const CodeBlocks=({heading,position,subheading,ctabtn1,ctabtn2,codeblocks,backgr
                     }}
                     omitDeletionAnimation={true}/>
                </div>
-            </div>
+            </motion.div>
 
             
         </div>

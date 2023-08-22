@@ -16,7 +16,6 @@ export default function getUserDetails(token,navigate){
             const response=await apiConnector("GET",GET_USER_DETAILS_API,null,null,{
                 Authorization:`Bearer ${token}`
             })
-            console.log(response);
             if(!response.data.success){
                 throw Error(response.data.message)
             }
@@ -30,10 +29,7 @@ export default function getUserDetails(token,navigate){
         }
         toast.dismiss(toastId);
         dispatch(setLoading(false));
-
     }
-
-
 }
 
 export async function getUserEnrolledCourse(token){
@@ -41,11 +37,11 @@ export async function getUserEnrolledCourse(token){
     let result=[];
     try {
         const response=await apiConnector("GET",GET_USER_ENROLLED_COURSES_API,null,null,{Authorization: `Bearer ${token}`})
-
+        console.log(response);
         if(!response.data.success){
             throw new Error(response.data.message)
         }
-        result=response.data
+        result=response.data.data
     }catch(error){
         console.log(error);
         toast.error("Oppss...!! cannot get it ")

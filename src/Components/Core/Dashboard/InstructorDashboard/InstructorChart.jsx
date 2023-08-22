@@ -37,22 +37,32 @@ export default function InstructorChart({courses}){
     }
     // create options 
     const options={
-
+        maintainAspectRatio: false,
     }
 
 
     return( 
-        <div>
+        <div className="flex flex-1 flex-col gap-y-4 rounded-md bg-richblack-800 p-6">
             <div>
-                <p>Visulise</p>
+                <p className="text-lg font-bold text-richblack-5">Visulise</p>
             </div>
-            <div>
-                <button onClick={()=>setCurrentChart("Student")}>Student</button>
-                <button onClick={()=>setCurrentChart("Income")}>Income</button>
+            <div className="space-x-4 font-semibold">
+                <button onClick={()=>setCurrentChart("Student")}
+                className={`rounded-sm p-1 px-3 transition-all duration-200 ${
+                    currentChart === "students"
+                    ? "bg-richblack-700 text-yellow-50"
+                    : "text-yellow-400"
+                }`}>Student</button>
+                <button onClick={()=>setCurrentChart("Income")}
+                    className={`rounded-sm p-1 px-3 transition-all duration-200 ${
+                    currentChart === "students"
+                    ? "bg-richblack-700 text-yellow-50"
+                    : "text-yellow-400"
+                }`}>Income</button>
             </div>
-            <div>
+            <div className="relative mx-auto aspect-square h-full w-full">
                 <Pie data={currentChart==="Student" ? chartDataForStudents: chartDataForIncome}
-                    options={options}
+                options={options}
                 />
             </div>
 
