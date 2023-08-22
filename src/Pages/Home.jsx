@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useRef,useEffect} from "react";
 import {AiOutlineArrowRight, AiOutlineFundProjectionScreen} from "react-icons/ai"
 import { Link } from "react-router-dom";
 import HighLightedText from "../Components/Core/HomePage/HighLightedText";
@@ -12,7 +12,31 @@ import InstructorSection from "../Components/Core/HomePage/InstructorSection";
 import ExploreMore from "../Components/Core/HomePage/ExploreMore";
 import Footer from "../Components/Common/Footer";
 import ReviewSlider from "../Components/Common/ReviewSlider";
+import {motion,useAnimation,useInView} from "framer-motion"
+const containerVarient={
+    hiddenLeft:{
+        opacity:0,
+        x:"-100vw"
+    },
+    hiddenRight:{
+        opacity:0,
+        x:"100vw"
+    },
+    visible:{
+        opacity:1,
+        x:0
+    }
+}
 const Home=()=>{
+    const ref=useRef(null);
+    const inview=useInView(ref,{once:true});
+    const mainControl=useAnimation();
+    useEffect(()=>{
+        if(inview){
+            mainControl.start("visible")
+        }
+
+    },[inview])
     return (
         <div>
             {/* section 1 */}
@@ -121,22 +145,22 @@ const Home=()=>{
 
                 </div>
 
-                <div className="mx-auto w-11/12 max-w-maxContent flex flex-col items-center justify-between gap-7">
+                <div ref={ref} className="mx-auto w-11/12 max-w-maxContent flex flex-col items-center justify-between gap-7">
                     <div className="flex flex-col justify-between
                     lg:mt-20 lg:flex-row
                     lg:gap-0 gap-7 mb-10 mt-[-6.25rem]">
-                        <div className="text-4xl font-semibold lg:w-[45%] ">
+                        <motion.div variants={containerVarient} initial={"hiddenLeft"} animate={mainControl} transition={{type:"spring",delay:0.5,duration:1}} className="text-4xl font-semibold lg:w-[45%] ">
                         Get the skills you need for a <HighLightedText text={"job that is in demand."}/>
-                        </div>
+                        </motion.div>
 
-                        <div className="flex flex-col gap-10 lg:w-[40%] items-start">
+                        <motion.div  variants={containerVarient} initial={"hiddenRight"} animate={mainControl} transition={{type:"spring",delay:1}} className="flex flex-col gap-10 lg:w-[40%] items-start">
                             <p className="text-[1rem]">The modern StudyNotion is the dictates its own terms. Today, to be a competitive specialist requires more than professional skills.</p>
 
                             <Button active={true} linkto={"/signup"}>
                                 Learn More
                             </Button>
 
-                        </div>
+                        </motion.div>
                     </div>
 
                     <TimeLineSection/>

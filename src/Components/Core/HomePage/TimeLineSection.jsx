@@ -1,9 +1,10 @@
-import React from "react";
+import React,{useEffect,useRef} from "react";
 import Logo1 from "../../../assets/TimeLineLogo/Logo1.svg"
 import Logo2 from "../../../assets/TimeLineLogo/Logo2.svg"
 import Logo3 from "../../../assets/TimeLineLogo/Logo3.svg"
 import Logo4 from "../../../assets/TimeLineLogo/Logo4.svg"
 import TimeLineImage from "../../../assets/Images/TimelineImage.png"
+import {motion,useAnimation,useInView} from "framer-motion"
 
 const timeLineData=[
     {
@@ -27,13 +28,37 @@ const timeLineData=[
         description:"Code your way to a solution"
     },
 ]
+const containerVarient={
+    hiddenLeft:{
+        opacity:0,
+        x:"100vw"
+    },
+    hiddenRight:{
+        opacity:0,
+        x:"-100vw"
+    },
+    visible:{
+        opacity:1,
+        x:0
+    }
+}
+
 
 const TimeLineSection=()=>{
+    const ref=useRef(null);
+    const inview=useInView(ref,{once:true});
+    const mainControl=useAnimation();
+    useEffect(()=>{
+        if(inview){
+            mainControl.start("visible")
+        }
+
+    },[inview])
     return (
         <div>
-            <div className="flex flex-col lg:flex-row gap-20 mb-20  items-center">
+            <div ref={ref}  className="flex flex-col lg:flex-row gap-20 mb-20  items-center">
 
-                <div className="lg:w-[45%] flex flex-col gap-14 lg:gap-3">
+                <motion.div variants={containerVarient} initial={"hiddenLeft"} animate={mainControl} transition={{type:"spring",delay:0.5,duration:1}} className="lg:w-[45%] flex flex-col gap-14 lg:gap-3">
                     {timeLineData.map((element,index)=>{
                         return (
                             <div className={"flex flex-col lg:gap-3"} key={index}>
@@ -57,9 +82,9 @@ const TimeLineSection=()=>{
                             </div>   
                         )
                     })}
-                </div>
+                </motion.div>
                 
-                <div className="relative w-fit h-fit shadow-blue-200 shadow-[0px_0px_30px_0px]">
+                <motion.div variants={containerVarient} initial={"hiddenRight"} animate={mainControl} transition={{type:"spring",delay:1}} className="relative w-fit h-fit shadow-blue-200 shadow-[0px_0px_30px_0px]">
 
                         <div className="absolute lg:bottom-0 bg-caribbeangreen-700 flex lg:flex-row flex-col text-white uppercase lg:py-10 gap-4 lg:0 lg:left-[50%] lg:translate-x-[-50%] lg:translate-y-[50%]">
                             <div className="flex flex-row gap-5 items-center border-r border-caribbeangreen-300 px-7">
@@ -80,7 +105,7 @@ const TimeLineSection=()=>{
                         ></img>
 
                        
-                </div>
+                </motion.div>
 
             </div>
 

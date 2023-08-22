@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {HomePageExplore} from "../../../data/homepage-explore";
 import HighLightedText from "./HighLightedText";
 import CourseCard from "./CourseCard";
+import {motion} from "framer-motion"
 
 const tabName=["Free","New to coding","Most popular","Skills paths","Career paths"]
 
