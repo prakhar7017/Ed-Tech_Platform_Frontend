@@ -40,10 +40,10 @@ export default function CourseTable({courses,setCourses}){
             <Table className="rounded-xl border border-richblack-800 ">
                 <Thead>
                     <Tr className="flex lg:flex-row justify-between gap-x-10 px-6 py-2 items-center text-sm font-medium text-richblack-100 uppercase rounded-t-md border-b border-richblack-800">
-                        <Th className="flex-1 text-left">Courses</Th>
-                        <Th>Duration</Th>
-                        <Th>Price</Th>
-                        <Th>Actions</Th>
+                        <Th className="flex-1 text-left text-sm font-medium uppercase text-richblack-100">Courses</Th>
+                        <Th className="text-left text-sm font-medium uppercase text-richblack-100">Duration</Th>
+                        <Th className="text-left text-sm font-medium uppercase text-richblack-100">Price</Th>
+                        <Th className="text-left text-sm font-medium uppercase text-richblack-100">Actions</Th>
                     </Tr>
                 </Thead>
                 <Tbody>
@@ -84,16 +84,16 @@ export default function CourseTable({courses,setCourses}){
                                             }
                                         </div>
                                     </Td>
-                                    <Td>
+                                    <Td className="text-sm font-medium text-richblack-100">
                                         2hr 30min
                                     </Td>
-                                    <Td>
+                                    <Td className="text-sm font-medium text-richblack-100">
                                             <div className="flex items-center gap-x-[0.1rem]">
                                                 <HiOutlineCurrencyRupee/>
                                                 {course?.price}
                                             </div>
                                     </Td>
-                                    <Td>
+                                    <Td className="text-sm font-medium text-richblack-100 ">
                                         <div className="flex lg:flex-row gap-x-2 justify-between">
                                             <button disabled={loading} onClick={()=>navigate(`/dashboard/edit-course/${course._id}`)}>
                                                 <MdModeEditOutline className="text-xl "/>
