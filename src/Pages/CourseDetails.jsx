@@ -22,10 +22,12 @@ export default function CourseDetails(){
     const {token}=useSelector((state)=>state.auth);
     const {loading}=useSelector((state)=>state.profile);
     const {paymentLoading}=useSelector((state=>state.course));
+
     const [totalLecture,setTotalLecture]=useState(0);
-    const [courseData,setCourseData]=useState();
+    const [courseData,setCourseData]=useState(null);
     const [avgReviewCount,setAvgReviewCount]=useState(0);
     const [isActive,setActive]=useState([]);
+    
     const [confirmationModal,setConfirmationModal]=useState(null);
     const navigate=useNavigate();
     const dispatch=useDispatch();

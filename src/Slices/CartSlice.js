@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit"
-import { toast} from "react-hot-toast"
+import { toast } from "react-hot-toast"
 
 
 const initialState={
@@ -25,13 +25,15 @@ const cartSlice=createSlice({
             state.totalItems++
             state.total=state.total+course.price
 
-            localStorage.setItem("cart",JSON.stringify(state.cart))
+            localStorage.setItem("cart", JSON.stringify(state.cart))
             localStorage.setItem("total",JSON.stringify(state.total))
             localStorage.setItem("totalItems",JSON.stringify(state.totalItems))
+            
+            toast.success("Course added to cart")
         },
         removeFromCart:(state,action)=>{
-            const course=action.payload;
-            const index=state.cart.findIndex((item)=>item._id===course._id)
+            const courseId=action.payload;
+            const index=state.cart.findIndex((item)=>item._id===courseId)
 
             if(index>=0){
                 state.totalItems--

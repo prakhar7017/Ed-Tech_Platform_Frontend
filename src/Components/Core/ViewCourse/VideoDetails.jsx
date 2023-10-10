@@ -7,27 +7,29 @@ import { Player,BigPlayButton } from 'video-react';
 import 'video-react/dist/video-react.css';
 import {BsFillCollectionPlayFill} from "react-icons/bs"
 import IconButton from "../../Common/IconButton";
-export default function VideoDetails(){
 
+export default function VideoDetails(){
+    const {courseId,sectionId,subSectionId}=useParams();
+    
     const dispatch=useDispatch();
     const navigate=useNavigate();
-    const loaction=useLocation();
+    const location=useLocation();
+    const playRef=useRef();
 
-    const {courseId,sectionId,subSectionId}=useParams();
     const {token}=useSelector((state)=>state.auth)
-    const {courseSectionData,courseEntireData,completedLectures,totalNoOfLectures}=useSelector((state)=>state.viewCourse);
+    const {courseSectionData,courseEntireData,completedLectures}=useSelector((state)=>state.viewCourse);
 
     const [videoData,setVideoData]=useState([]);
     const [videoEnded,setVideoEnded]=useState(false);
     const [loading,setLoading]=useState(false);
-    const [previewSource, setPreviewSource] = useState("")
+    const [previewSource, setPreviewSource] = useState("");
 
 
-    const playRef=useRef();
 
 
     useEffect(()=>{
         const setVideo=async()=>{
+            setLoading(true);
             if(!courseSectionData.length){
                 return;
             }
@@ -42,10 +44,11 @@ export default function VideoDetails(){
                 setVideoData(filterVideoData[0])
                 setVideoEnded(false);
                 setPreviewSource(courseEntireData.thumbnail)
+                setLoading(false);
             }
         }
         setVideo();
-    },[courseSectionData,courseEntireData,loaction.pathname])
+    },[courseSectionData,courseEntireData,location.pathname])
 
 
     const isFirstVideo=()=>{
@@ -124,6 +127,30 @@ export default function VideoDetails(){
             dispatch(updateCompletedLectures(result));
         }
     }
+
+    
+    if(loading || !courseSectionData || !courseEntireData){
+        return(
+            <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
+                <div className="spinner">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        )
+    }
+
+    // if(!categoryPageDate?.success){
+    //     return (
+    //         <div>
+    //             <Error/>
+    //         </div>
+    //     )
+    // }
     return (
         <div className="flex flex-col gap-5 text-white">
              {
@@ -173,13 +200,13 @@ export default function VideoDetails(){
                                 <div className="mt-10 flex min-w-[250px] justify-center gap-x-4 text-xl">
                                     {!isFirstVideo() && (
                                         <button disabled={loading} onClick={goToPrevVideo}
-                                        className="text-richblack-800 bg-yello-50 max-w-maxContent rounded-md p-2">
+                                        className="text-white bg-yello-50 max-w-maxContent rounded-md p-2">
                                             Previous
                                         </button>
                                     )}
                                     {!isLastVideo() && (
                                         <button disabled={loading} onClick={goToNextVideo}
-                                        className="text-richblack-800 bg-yello-50 max-w-maxContent rounded-md p-2">
+                                        className="text-white bg-yello-50 max-w-maxContent rounded-md p-2">
                                             Next
                                         </button>
                                     )}

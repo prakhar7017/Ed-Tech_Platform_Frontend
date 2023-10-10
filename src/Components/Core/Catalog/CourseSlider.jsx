@@ -15,10 +15,9 @@ export default function CourseSlider({Courses}){
                     <Swiper
                         slidesPerView={1}
                         loop={true}
-                        spaceBetween={200}
+                        spaceBetween={25}
                         pagination={true}
                         modules={[Autoplay,Pagination,Navigation]}
-                        className="mySwiper"
                         autoplay={{
                         delay: 1000,
                         disableOnInteraction: false,
@@ -27,10 +26,11 @@ export default function CourseSlider({Courses}){
                         breakpoints={{
                             1024:{slidesPerView:3,}
                         }}
+                        className="max-h-[30rem]"
                     >
                         {
                             Courses?.map((course,index)=>(
-                                <SwiperSlide key={index}>
+                                <SwiperSlide key={index} className="bg-richblack-900 ">
                                     <Course_Card course={course}
                                         Height={`h-[250px]`}
                                     />
@@ -39,7 +39,7 @@ export default function CourseSlider({Courses}){
                         }
                 </Swiper>) 
                 :
-                (<p>No Course Found</p>)
+                (<p className="text-xl text-richblack-5">No Course Found</p>)
             }
         </div>
     )

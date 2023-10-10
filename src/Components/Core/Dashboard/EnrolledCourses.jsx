@@ -31,7 +31,7 @@ const EnrolledCourses=()=>{
                             <div></div>
                             <div></div>
                             <div></div>
-                            <div></div>
+                            <div></div> 
                             <div></div>
                         </div>
                     </div>

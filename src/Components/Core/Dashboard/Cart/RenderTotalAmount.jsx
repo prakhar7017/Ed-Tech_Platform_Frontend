@@ -7,11 +7,13 @@ import { buyCourse } from "../../../../Services/Operations/StudentFeatureAPI";
 
 const RenderTotalAmount=()=>{
     const {total,cart}=useSelector((state)=>state.cart);
-    const {user}=useState((state)=>state.profile)
-    const {token}=useState((state)=>state.auth)
+    const {user}=useSelector((state)=>state.profile)
+    const {token}=useSelector((state)=>state.auth)
     const navigate=useNavigate();
     const dispatch=useDispatch();
+
         const handleonClick=()=>{
+            console.log("hello")
         const courses=cart.map((course)=>course._id);
         buyCourse(token,courses,user,navigate,dispatch)
     }
@@ -24,7 +26,7 @@ const RenderTotalAmount=()=>{
                 </div>
                 <IconButton
                     text={"Buy Now"}
-                    onClick={handleonClick}
+                    onclick={handleonClick}
                     customeClasses={"w-full justify-center"}
 
                 />

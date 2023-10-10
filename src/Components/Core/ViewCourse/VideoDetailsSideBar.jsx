@@ -11,7 +11,7 @@ import { AiOutlineDown } from "react-icons/ai"
 export default function VideoDetailsSideBar({setReviewModal}){
 
     const navigate=useNavigate();
-    const loaction=useLocation();
+    const location=useLocation();
 
     const [activeStatus,setActiveStatus]=useState("");
     const [videobarActive,setVideobarActive]=useState("");
@@ -36,7 +36,7 @@ export default function VideoDetailsSideBar({setReviewModal}){
             setVideobarActive(activeSubSectionId);
 
         })()
-    },[courseSectionData,courseEntireData,loaction.pathname]);
+    },[courseSectionData,courseEntireData,location.pathname]);
 
     return (
         <>
@@ -57,7 +57,7 @@ export default function VideoDetailsSideBar({setReviewModal}){
                     </div>
                    
                     <div className="flex flex-col">
-                        <p>{courseEntireData.courseName}</p>
+                        <p>{courseEntireData?.courseName}</p>
                         <p className="text-sm font-semibold text-richblack-500">{completedLectures?.length} / {totalNoOfLectures}</p>
                     </div>
                 </div>

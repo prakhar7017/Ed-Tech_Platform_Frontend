@@ -10,19 +10,19 @@ import {addToCart} from "../../../Slices/CartSlice";
 
 export default function CourseCardDetails({setConfirmationModal,handleBuyCourse,course}){
 
+
     const {user}=useSelector((state)=>state.profile);
     const {token}=useSelector((state)=>state.auth);
     const navigate=useNavigate();
     const dispatch=useDispatch();
 
-    const handelAddToCart=(course)=>{
+    const handelAddToCart=()=>{
         if(user && user?.accountType===ACCOUNT_TYPE.INSTRUCTOR){
             toast.error("Sorry,Instructor Cannot Buy A Course")
             return;
         }
         if(user && user?.accountType===ACCOUNT_TYPE.STUDENT && token){
             dispatch(addToCart(course))
-            toast.success("Added To Cart");
             return;
         }
 
@@ -57,7 +57,8 @@ export default function CourseCardDetails({setConfirmationModal,handleBuyCourse,
                         {
                             (!course?.studentEnrolled.includes(user?._id))&& (
                                 <button
-                                onClick={handelAddToCart(course)}>
+                                onClick={handelAddToCart}
+                                 className="rounded-lg bg-richblack-800 px-[12px] py-[8px] w-full text-richblack-5 font-semibold text-base text-center h-[2.5rem]">
                                     Add To Cart
                                 </button>
                             )
